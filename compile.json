@@ -57,7 +57,6 @@
       "include": [
         "qx.theme.Modern",
         "cboulanger.eventrecorder.UiController",
-        "cboulanger.eventrecorder.type.Qooxdoo",
         "cboulanger.eventrecorder.ObjectIdGenerator"
       ],
       "environment": {

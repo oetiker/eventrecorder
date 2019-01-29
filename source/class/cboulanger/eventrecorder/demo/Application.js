@@ -79,17 +79,10 @@ qx.Class.define("cboulanger.eventrecorder.demo.Application", {
       win.addOwnedQxObject(button2, "button2");
 
       // event recorder
-      const qxRecorder = new cboulanger.eventrecorder.type.Qooxdoo();
-      const qxController = new cboulanger.eventrecorder.UiController(qxRecorder, "Generate qooxdoo script");
-      qxController.set({width:400, height:300});
-      doc.add(qxController, {top:0, right:0});
-      qxController.show();
-
-      const testcafeRecorder = new cboulanger.eventrecorder.type.TestCafe();
-      const testcafeController = new cboulanger.eventrecorder.UiController(testcafeRecorder, "Generate TestCafe script");
-      testcafeController.set({width:400, height:300});
-      doc.add(testcafeController, {bottom:0, right:0});
-      testcafeController.show();
+      const controller = new cboulanger.eventrecorder.UiController();
+      controller.setPlayer(new cboulanger.eventrecorder.player.Qooxdoo());
+      doc.add(controller, {top:0, right:0});
+      controller.show();
     }
   }
 });
