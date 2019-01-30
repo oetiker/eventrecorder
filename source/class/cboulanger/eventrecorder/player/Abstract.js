@@ -69,8 +69,15 @@ qx.Class.define("cboulanger.eventrecorder.player.Abstract", {
      * The delay between events
      */
     delay: {
-      check: "number",
+      check: "Number",
       init: 500
+    },
+
+    canReplay: {
+      check: "Boolean",
+      nullable: false,
+      init: false,
+      event: "changeCanReplay"
     }
   },
 
@@ -81,64 +88,48 @@ qx.Class.define("cboulanger.eventrecorder.player.Abstract", {
   {
 
     /**
-     * Given an array of script lines, return a piece of code that can be
-     * pasted into a test suite.
-     * @param {String[]} lines Array of script lines
-     * @return {String}
-     */
-    generateScript(lines) {
-      throw new Error("Method generateScript() must be implemented by subclass.");
-    },
-
-    /**
-     * If the recorder is able to replay the generated script, override this
-     * method and return true
-     * @return {boolean}
-     */
-    canReplay() {
-      return false;
-    },
-
-    /**
-     * Implement in subclass if the recorder can replay the given script
-     * @param script {Array} The script to replay, as an array of self-contained lines
-     * @param delay {Number} The delay in miliseconds, defaults to 500
+     * Replays the given script of intermediate code
+     * @param script {String} The script to replay
      * @return {Promise} Promise which resolves when the script has been replayed, or
      * rejects with an error
+     * @todo implement pausing
      */
-    async replay(script, delay=500) {
-      if (!this.canReplay()) {
-        throw new Error("This recorder cannot replay the event log");
+    async replay(script) {
+      this.setRunning(true);
+      for (let line of script.split(/\n/)) {
+        eval(this.generateReplayCode(line));
+        await new Promise(resolve => qx.event.Timer.once(resolve, null, this.getDelay()));
       }
-      throw new Error("Method replay() must be implemented by subclass");
-    }
-  },
+      this.setRunning(false);
+    },
 
+    /**
+     * Translates the intermediate code into javascript code
+     * @param script
+     * @return {string} Javasc
+     */
+    translate(script) {
+      return script.split(/\n/).map(line => this.generateReplayCode(line)).join("\n");
+    },
 
-  /**
-   * Will be called after class has been loaded, before application startup
-   */
-  defer: function() {
-    if (!qx.core.Environment.get("module.objectid") || !qx.core.Environment.get("eventrecorder.enabled")) {
-      return;
+    /**
+     * Given an async piece of code which checks for a condition or an application state,
+     * return code that checks for this condition, throwing an error if the
+     * condition hasn't been fulfilled within the set timeout.
+     * @param condition
+     */
+    generateWaitForCode(condition) {
+      return `await cboulanger.eventrecorder.player.Abstract.waitForCondition(()=>{${condition}},${this.getInterval()},${this.getTimeout()},condition);`;
+    },
+
+    /**
+     * Given a line of intermediate code, return a line of javascript code that
+     * can replay the corresponding user action.
+     * @param code {String} A line of intermediate code
+     * @return {String} A line of javascript code
+     */
+    generateReplayCode(code) {
+      throw new Error("Method generateReplayCode() must be implemented by subclass");
     }
-    qx.bom.Lifecycle.onReady(() => {
-      // replay
-      let storedScript = qx.bom.storage.Web.getLocal().getItem(cboulanger.eventrecorder.UiController.LOCAL_STORAGE_KEY);
-      if (storedScript && storedScript.length) {
-        cboulanger.eventrecorder.ObjectIdGenerator.getInstance().addListenerOnce("done", async () => {
-          /*eslint no-alert: "off"*/
-          let confirm = window.confirm("Press OK to start replay");
-          if (confirm) {
-            try {
-              await (new cboulanger.eventrecorder.player.Qooxdoo()).replay(storedScript);
-            } catch (e) {
-              qx.core.Init.getApplication().error(e);
-            }
-          }
-          qx.bom.storage.Web.getLocal().removeItem(cboulanger.eventrecorder.UiController.LOCAL_STORAGE_KEY);
-        });
-      }
-    });
   }
 });

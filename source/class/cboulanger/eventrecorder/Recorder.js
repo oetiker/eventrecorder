@@ -19,7 +19,7 @@
  */
 qx.Class.define("cboulanger.eventrecorder.Recorder", {
   extend : qx.core.Object,
-  include : [cboulanger.eventrecorder.MHelperMethods],
+  include : [cboulanger.eventrecorder.MHelperMethods, cboulanger.eventrecorder.MState],
 
   /**
    * Constructor
@@ -27,6 +27,7 @@ qx.Class.define("cboulanger.eventrecorder.Recorder", {
   construct : function() {
     this.base(arguments);
     this.__excludeIds = [];
+    this.__lines = [];
     this.addGlobalEventListener((target, event) => {
       if (!this.__running) {
         return;
@@ -50,9 +51,7 @@ qx.Class.define("cboulanger.eventrecorder.Recorder", {
    */
   members :
   {
-    __running : false,
     __lines : null,
-    __paused : false,
     __excludeIds : null,
 
     /**
@@ -78,44 +77,10 @@ qx.Class.define("cboulanger.eventrecorder.Recorder", {
     },
 
     /**
-     * Starts the recorder, overwriting any recorded events
+     * Called by start()
      */
-    start() {
+    reset() {
       this.__lines = [];
-      this.__running = true;
-      this.__paused = false;
-    },
-
-    /**
-     * Pause the recorder
-     */
-    pause() {
-      this.__running = false;
-      this.__paused = true;
-    },
-
-    /**
-     * Returns true if the recorder is paused
-     * @return {boolean}
-     */
-    isPaused() {
-      return this.__paused;
-    },
-
-    /**
-     * Resumes recording.
-     */
-    resume() {
-      this.__running = true;
-      this.__paused = false;
-    },
-
-    /**
-     * Stops the recording.
-     */
-    stop() {
-      this.__running = false;
-      this.__paused = false;
     },
 
     /**
@@ -230,7 +195,7 @@ qx.Class.define("cboulanger.eventrecorder.Recorder", {
      * @return {String}
      */
     getScript() {
-      return this.__lines.join(/\n/);
+      return this.__lines.join("\n");
     }
   }
 });

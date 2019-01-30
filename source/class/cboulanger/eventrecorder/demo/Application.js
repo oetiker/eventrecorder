@@ -10,7 +10,6 @@
 
 /**
  * This is the main application class of "UI Event Recorder"
- * @asset(cboulanger/eventrecorder/*)
  */
 qx.Class.define("cboulanger.eventrecorder.demo.Application", {
   extend : qx.application.Standalone,
@@ -77,12 +76,6 @@ qx.Class.define("cboulanger.eventrecorder.demo.Application", {
       button1.setQxObjectId("button1");
       button1.addOwnedQxObject(win, "window");
       win.addOwnedQxObject(button2, "button2");
-
-      // event recorder
-      const controller = new cboulanger.eventrecorder.UiController();
-      controller.setPlayer(new cboulanger.eventrecorder.player.Qooxdoo());
-      doc.add(controller, {top:0, right:0});
-      controller.show();
     }
   }
 });

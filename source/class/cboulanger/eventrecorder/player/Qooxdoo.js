@@ -15,45 +15,23 @@
 ************************************************************************ */
 
 /**
- * This is a qooxdoo class
+ * This is an event player that works in the client
  */
 qx.Class.define("cboulanger.eventrecorder.player.Qooxdoo", {
 
-  extend : cboulanger.eventrecorder.player.Abstract,
+  extend: cboulanger.eventrecorder.player.Abstract,
 
-  members :
+  include: [cboulanger.eventrecorder.MState],
+
+  properties: {
+    canReplay: {
+      refine: true,
+      init: true
+    }
+  },
+
+  members:
   {
-    /**
-     * Replays the given script of intermediate code
-     * @param script {String} The script to replay
-     * @return {Promise} Promise which resolves when the script has been replayed, or
-     * rejects with an error
-     */
-    async replay(script) {
-      for (let line of script.split(/\n/)) {
-        eval(this.generateReplayCode(line));
-        await new Promise(resolve => qx.event.Timer.once(resolve, null, this.getDelay()));
-      }
-    },
-
-    /**
-     * Translates the intermediate code into javascript code
-     * @param script
-     * @return {string} Javasc
-     */
-    translate(script) {
-      return script.split(/\n/).map(line => this.generateReplayCode(line)).join("\n");
-    },
-
-    /**
-     * Given an async piece of code which checks for a condition or an application state,
-     * return code that checks for this condition, throwing an error if the
-     * condition hasn't been fulfilled within the set timeout.
-     * @param condition
-     */
-    __waitFor(condition) {
-      return `await cboulanger.eventrecorder.player.Abstract.waitForCondition(()=>{${condition}},${this.getInterval()},${this.getTimeout()},condition);`;
-    },
 
     /**
      * Given a line of intermediate code, return a line of javascript code that
@@ -74,7 +52,7 @@ qx.Class.define("cboulanger.eventrecorder.player.Qooxdoo", {
          */
         case "check-appear":
         case "check-disappear":
-          return this.__waitFor(`${command==="check-appear"?"":"!"} qx.core.Id.getQxObject("${id}").isVisible()`);
+          return this.generateWaitForCode(`${command==="check-appear"?"":"!"} qx.core.Id.getQxObject("${id}").isVisible()`);
         /**
          * set-value <id> <json value>
          */
