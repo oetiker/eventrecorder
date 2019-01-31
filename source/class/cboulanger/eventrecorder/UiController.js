@@ -19,7 +19,8 @@
  * @asset(cboulanger/eventrecorder/*)
  */
 qx.Class.define("cboulanger.eventrecorder.UiController", {
-  extend : qx.ui.window.Window,
+  extend: qx.ui.window.Window,
+  include: [cboulanger.eventrecorder.MLoadingPopup],
 
   statics: {
     LOCAL_STORAGE_KEY: "cboulanger.eventrecorder.UiController.script",
@@ -213,6 +214,7 @@ qx.Class.define("cboulanger.eventrecorder.UiController", {
      */
     _toggleRecord(e) {
       if (e.getData()) {
+        this.resetScript();
         this.getRecorder().start();
       }
     },
@@ -252,7 +254,7 @@ qx.Class.define("cboulanger.eventrecorder.UiController", {
         element.click();
         document.body.removeChild(element);
       }
-      download("eventrecorder.txt", this.getRecorder().getScript());
+      download("eventrecorder.txt", this.getScript());
     }
   },
 
@@ -276,14 +278,22 @@ qx.Class.define("cboulanger.eventrecorder.UiController", {
       // replay
       let storedScript = qx.bom.storage.Web.getLocal().getItem(cboulanger.eventrecorder.UiController.LOCAL_STORAGE_KEY);
       if (storedScript && storedScript.length) {
-        cboulanger.eventrecorder.ObjectIdGenerator.getInstance().addListenerOnce("done", async () => {
-
+        controller.setScript(storedScript);
+        controller.createPopup();
+        controller.showPopup("Starting replay, please wait...");
+        const objIdGen = cboulanger.eventrecorder.ObjectIdGenerator.getInstance();
+        objIdGen.addListenerOnce("done", async () => {
           controller.setMode("player");
+          player.addListener("progress", e => {
+            let [step, steps] = e.getData();
+            controller.showPopup(`Replaying ... (${step}/${steps})`);
+          });
           try {
             await player.replay(storedScript);
           } catch (e) {
             qx.core.Init.getApplication().error(e);
           }
+          controller.hidePopup();
           qx.bom.storage.Web.getLocal().removeItem(cboulanger.eventrecorder.UiController.LOCAL_STORAGE_KEY);
           controller.setMode("recorder");
         });

@@ -51,8 +51,9 @@ qx.Class.define("cboulanger.eventrecorder.Recorder", {
    */
   members :
   {
-    __lines : null,
-    __excludeIds : null,
+    __lines: null,
+    __excludeIds: null,
+    __lastEventTimestamp: null,
 
     /**
      * Exclude the given id(s) from recording
@@ -79,8 +80,9 @@ qx.Class.define("cboulanger.eventrecorder.Recorder", {
     /**
      * Called by start()
      */
-    reset() {
+    beforeStart() {
       this.__lines = [];
+      this.__lastEventTimestamp = 0;
     },
 
     /**
@@ -102,6 +104,10 @@ qx.Class.define("cboulanger.eventrecorder.Recorder", {
       return true;
     },
 
+    afterStop() {
+      this.__lastEventTimestamp = 0;
+    },
+
     /**
      * Given an object id, the event name and the even target, return one or more
      * pieces of intermediate code from which a player can replay the user action
@@ -112,6 +118,7 @@ qx.Class.define("cboulanger.eventrecorder.Recorder", {
      * @return {String[]} An array of script lines
      */
     createIntermediateCodeFromEvent(id, event, target) {
+      let lines = [];
       const type = event.getType();
       let data = typeof event.getData == "function" ? event.getData() : null;
       let owner = typeof target.getQxOwner == "function" ? target.getQxOwner() : null;
@@ -122,7 +129,8 @@ qx.Class.define("cboulanger.eventrecorder.Recorder", {
             case target instanceof qx.ui.tree.core.FolderOpenButton:
               return [];
           }
-          return [`execute ${id}`];
+          lines.push(`execute ${id}`);
+          break;
         case "appear":
         case "disappear":
           if (qx.ui.core.FocusHandler.getInstance().isFocusRoot(qx.core.Id.getQxObject(id))) {
@@ -139,19 +147,21 @@ qx.Class.define("cboulanger.eventrecorder.Recorder", {
             const ownerId = qx.core.Id.getAbsoluteIdOf(owner);
             const model = owner.getModel();
             const indexes = target.toArray().map(item => model.indexOf(item));
-            return [`set-model-selection ${ownerId} ${JSON.stringify(indexes)}`];
+            lines.push(`set-model-selection ${ownerId} ${JSON.stringify(indexes)}`);
+            break;
           }
           // other form fields
           if (typeof data === "string") {
             data = "\"" + data + "\"";
           }
-          return [`set-value ${id} ${data}`];
+          lines.push(`set-value ${id} ${data}`);
+          break;
         }
         case "open":
         case "close": {
           if (target instanceof qx.ui.tree.VirtualTree) {
             let row = target.getLookupTable().indexOf(data);
-            return [`${type}-tree-node ${id} ${row}`];
+            lines.push(`${type}-tree-node ${id} ${row}`);
           }
           return [];
         }
@@ -159,35 +169,46 @@ qx.Class.define("cboulanger.eventrecorder.Recorder", {
         case "treeClose":
         case "treeOpenWithContent":
         case "treeOpenWhileEmpty":
-          return [`${type==="treeClose"?"close-tree-node-treevirtual":"open-tree-node-treevirtual"}} ${id} ${data.nodeId}`];
+          lines.push(`${type==="treeClose"?"close-tree-node-treevirtual":"open-tree-node-treevirtual"} ${id} ${data.nodeId}`);
+          break;
 
         case "changeSelection": {
           if (target instanceof qx.ui.virtual.selection.Row) {
-            return [`set-row-selection ${id} [${data}]`];
+            lines.push(`set-row-selection ${id} [${data}]`);
+            break;
           }
           if (target instanceof qx.ui.table.selection.Model) {
-            let lines =[`reset-table-selection ${id}`];
+            lines.push(`reset-table-selection ${id}`);
             let ranges = target.getSelectedRanges();
             if (ranges.length) {
               lines.push(`set-table-selection ${id} ${ranges[0].minIndex}, ${ranges[0].maxIndex}`);
             }
-            return [];
+            break;
           }
           if (data && data.length && qx.lang.Type.isArray(data)) {
             let selected = data[0];
             if (selected instanceof qx.core.Object && selected.getQxObjectId()) {
               let selectedId = qx.core.Id.getAbsoluteIdOf(selected);
-              return [`set-selection ${id} ${selectedId}`];
+              lines.push(`set-selection ${id} ${selectedId}`);
             } else if (typeof target.getSelectables == "function") {
               let index = target.getSelectables().indexOf(selected);
-              return [`set-from-selectables ${id} ${index}`];
+              lines.push(`set-from-selectables ${id} ${index}`);
             }
+            break;
           }
           return [];
         }
         default:
           return [];
       }
+      // prepend a wait command to replay delays in user action
+      let now = Date.now();
+      let msSinceLastEvent = now - (this.__lastEventTimestamp || now);
+      this.__lastEventTimestamp = now;
+      if (msSinceLastEvent) {
+        lines.unshift(`wait ${msSinceLastEvent}`);
+      }
+      return lines;
     },
 
     /**

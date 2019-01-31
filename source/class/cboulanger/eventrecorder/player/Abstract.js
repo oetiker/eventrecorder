@@ -66,9 +66,18 @@ qx.Class.define("cboulanger.eventrecorder.player.Abstract", {
     },
 
     /**
+     * if true, ignore user delays and use defaultDelay
+     */
+    useDefaultDelay: {
+      check: "Boolean",
+      nullable: false,
+      init: false
+    },
+
+    /**
      * The delay between events
      */
-    delay: {
+    defaultDelay: {
       check: "Number",
       init: 500
     },
@@ -79,6 +88,10 @@ qx.Class.define("cboulanger.eventrecorder.player.Abstract", {
       init: false,
       event: "changeCanReplay"
     }
+  },
+
+  events: {
+    "progress" : "qx.event.type.Data"
   },
 
   /**
@@ -96,7 +109,15 @@ qx.Class.define("cboulanger.eventrecorder.player.Abstract", {
      */
     async replay(script) {
       this.setRunning(true);
-      for (let line of script.split(/\n/)) {
+      let lines = script.split(/\n/);
+      let steps = lines.reduce((prev, curr, index) => prev+Number(!curr.startsWith("wait")), 0);
+      let step = 0;
+      for (let line of lines) {
+        let delay = 0;
+        if (!line.startsWith("wait")) {
+          step++;
+        }
+        this.fireDataEvent("progress", [step, steps]);
         let code = this.generateReplayCode(line);
         this.info("Executing: " + code);
         try {
@@ -109,7 +130,9 @@ qx.Class.define("cboulanger.eventrecorder.player.Abstract", {
           alert(e.message);
           break;
         }
-        await new Promise(resolve => qx.event.Timer.once(resolve, null, this.getDelay()));
+        if (delay) {
+          await new Promise(resolve => qx.event.Timer.once(resolve, null, delay));
+        }
       }
       this.setRunning(false);
     },

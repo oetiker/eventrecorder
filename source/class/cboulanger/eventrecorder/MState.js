@@ -28,8 +28,8 @@ qx.Mixin.define("cboulanger.eventrecorder.MState", {
      * Starts the recorder/player
      */
     start() {
-      if (typeof this.reset == "function") {
-        this.reset();
+      if (typeof this.beforeStart == "function") {
+        this.beforeStart();
       }
       this.setRunning(true);
       this.setPaused(false);
@@ -60,6 +60,9 @@ qx.Mixin.define("cboulanger.eventrecorder.MState", {
     stop() {
       this.setRunning(false);
       this.setPaused(false);
+      if (typeof this.afterStop == "function") {
+        this.afterStop();
+      }
     }
   }
 });
