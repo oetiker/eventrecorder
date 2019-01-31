@@ -97,7 +97,18 @@ qx.Class.define("cboulanger.eventrecorder.player.Abstract", {
     async replay(script) {
       this.setRunning(true);
       for (let line of script.split(/\n/)) {
-        eval(this.generateReplayCode(line));
+        let code = this.generateReplayCode(line);
+        this.info("Executing: " + code);
+        try {
+          let result = window.eval(code);
+          if (result instanceof Promise) {
+            await result;
+          }
+        } catch (e) {
+          this.error(e);
+          alert(e.message);
+          break;
+        }
         await new Promise(resolve => qx.event.Timer.once(resolve, null, this.getDelay()));
       }
       this.setRunning(false);
@@ -116,10 +127,12 @@ qx.Class.define("cboulanger.eventrecorder.player.Abstract", {
      * Given an async piece of code which checks for a condition or an application state,
      * return code that checks for this condition, throwing an error if the
      * condition hasn't been fulfilled within the set timeout.
-     * @param condition
+     * @param condition {String} The condition expression as a string
+     * @param timeoutmsg {String} A message to be shown if the condition hasn't been met before the timeout. If not given
+     * the condition expression will be shown
      */
-    generateWaitForCode(condition) {
-      return `await cboulanger.eventrecorder.player.Abstract.waitForCondition(()=>{${condition}},${this.getInterval()},${this.getTimeout()},condition);`;
+    generateWaitForCode(condition, timeoutmsg) {
+      return `(cboulanger.eventrecorder.player.Abstract.waitForCondition(() => ${condition},${this.getInterval()},${this.getTimeout()}, "${timeoutmsg||condition.replace(/"/g, "\\\"")}"))`;
     },
 
     /**

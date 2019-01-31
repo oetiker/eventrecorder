@@ -29,7 +29,7 @@ qx.Class.define("cboulanger.eventrecorder.Recorder", {
     this.__excludeIds = [];
     this.__lines = [];
     this.addGlobalEventListener((target, event) => {
-      if (!this.__running) {
+      if (!this.isRunning()) {
         return;
       }
       let id;

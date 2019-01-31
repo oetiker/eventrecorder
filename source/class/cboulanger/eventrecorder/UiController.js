@@ -22,10 +22,27 @@ qx.Class.define("cboulanger.eventrecorder.UiController", {
   extend : qx.ui.window.Window,
 
   statics: {
-    LOCAL_STORAGE_KEY: "cboulanger.eventrecorder.UiController.script"
+    LOCAL_STORAGE_KEY: "cboulanger.eventrecorder.UiController.script",
+    aliases: {
+      "eventrecorder.icon.record":  "cboulanger/eventrecorder/media-record.png",
+      "eventrecorder.icon.start":   "cboulanger/eventrecorder/media-playback-start.png",
+      "eventrecorder.icon.pause":   "cboulanger/eventrecorder/media-playback-pause.png",
+      "eventrecorder.icon.stop":    "cboulanger/eventrecorder/media-playback-stop.png",
+      "eventrecorder.icon.export":  "cboulanger/eventrecorder/document-save.png"
+    }
   },
 
   properties: {
+    /**
+     * Current mode
+     */
+    mode: {
+      check: ["player", "recorder"],
+      event: "changeMode",
+      init: "recorder",
+      apply: "_applyMode"
+    },
+
     /**
      * The recorder instance
      */
@@ -62,16 +79,9 @@ qx.Class.define("cboulanger.eventrecorder.UiController", {
 
     // workaround until icon theme can be mixed into application theme
     const aliasMgr = qx.util.AliasManager.getInstance();
-    const existingAliases = aliasMgr.getAliases();
-    const newAliases = {
-      "eventrecorder.icon.record":  "cboulanger/eventrecorder/media-record.png",
-      "eventrecorder.icon.start":   "cboulanger/eventrecorder/media-playback-start.png",
-      "eventrecorder.icon.pause":   "cboulanger/eventrecorder/media-playback-pause.png",
-      "eventrecorder.icon.stop":    "cboulanger/eventrecorder/media-playback-stop.png",
-      "eventrecorder.icon.export":  "cboulanger/eventrecorder/document-save.png"
-    };
-    for (let [alias, base] of Object.entries(newAliases)) {
-      if (!existingAliases[alias]) {
+    const aliases = aliasMgr.getAliases();
+    for (let [alias, base] of Object.entries(cboulanger.eventrecorder.UiController.aliases)) {
+      if (!aliases[alias]) {
         aliasMgr.add(alias, base);
       }
     }
@@ -106,10 +116,13 @@ qx.Class.define("cboulanger.eventrecorder.UiController", {
     recordButton.setIcon("eventrecorder.icon.record");
     recordButton.addListener("changeValue", this._toggleRecord, this);
     recorder.bind("running", recordButton, "value");
-    // disable recording during playback
-    this.bind("player.running", recordButton, "enabled");
+    recorder.bind("running", recordButton, "enabled", {
+      converter: v => !v
+    });
+    this.bind("mode", recordButton, "enabled", {
+      converter: v => v === "recorder"
+    });
     this.add(recordButton);
-
 
     // ADD PAUSE BUTTON
 
@@ -175,6 +188,13 @@ qx.Class.define("cboulanger.eventrecorder.UiController", {
    */
   members:
   {
+
+    _applyMode(value, old) {
+      if (!this.getPlayer()) {
+        throw new Error("Cannot switch to player mode: no player has been set");
+      }
+    },
+
     _getStoredScript() {
       return qx.bom.storage.Web.getLocal().getItem(cboulanger.eventrecorder.UiController.LOCAL_STORAGE_KEY);
     },
@@ -193,24 +213,20 @@ qx.Class.define("cboulanger.eventrecorder.UiController", {
      */
     _toggleRecord(e) {
       if (e.getData()) {
-        // start
-        if (this.getRecorder().isPaused()) {
-          this.getRecorder().resume();
-        } else {
-          this.getRecorder().start();
-        }
-      } else {
-        // pause
-        this.getRecorder().pause();
+        this.getRecorder().start();
       }
     },
+
+    // todo: pause
 
     _stop() {
       if (this.getRecorder().isRunning()) {
         this.getRecorder().stop();
-        this.setScript(this.getRecorder().getScript());
+        let script = this.getRecorder().getScript();
+        this.info(script);
+        this.setScript(script);
       }
-      if (this.getPlayer().isRunning()) {
+      if (this.getPlayer() && this.getPlayer().isRunning()) {
         this.getPlayer().stop();
       }
     },
@@ -223,9 +239,6 @@ qx.Class.define("cboulanger.eventrecorder.UiController", {
           this._storeScript();
           window.location.reload();
         }
-      } else {
-        // unpress button
-        // todo: pause replay
       }
     },
 
@@ -255,21 +268,24 @@ qx.Class.define("cboulanger.eventrecorder.UiController", {
       // show controller
       let controller = new cboulanger.eventrecorder.UiController();
       qx.core.Init.getApplication().getRoot().add(controller, {top:0, right:10});
+      // add a player
+      let player = new cboulanger.eventrecorder.player.Qooxdoo();
+      controller.setPlayer(player);
       controller.show();
 
       // replay
       let storedScript = qx.bom.storage.Web.getLocal().getItem(cboulanger.eventrecorder.UiController.LOCAL_STORAGE_KEY);
       if (storedScript && storedScript.length) {
         cboulanger.eventrecorder.ObjectIdGenerator.getInstance().addListenerOnce("done", async () => {
-          // add a player
-          let player = new cboulanger.eventrecorder.player.Qooxdoo();
-          controller.setPlayer(player);
+
+          controller.setMode("player");
           try {
             await player.replay(storedScript);
           } catch (e) {
             qx.core.Init.getApplication().error(e);
           }
           qx.bom.storage.Web.getLocal().removeItem(cboulanger.eventrecorder.UiController.LOCAL_STORAGE_KEY);
+          controller.setMode("recorder");
         });
       }
     });
