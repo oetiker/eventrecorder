@@ -1,0 +1,26 @@
+{
+  "version": 3,
+  "sources": [
+    "/home/travis/build/cboulanger/eventrecorder/source/class/cboulanger/eventrecorder/theme/Appearance.js"
+  ],
+  "names": [
+    "qx",
+    "Bootstrap",
+    "executePendingDefers",
+    "$$dbClassInfo",
+    "Theme",
+    "define",
+    "extend",
+    "theme",
+    "indigo",
+    "Appearance",
+    "appearances",
+    "cboulanger",
+    "eventrecorder"
+  ],
+  "mappings": ";;;;;;;;;;;;AAAAA,MAAGC,SAAH,CAAaC,oBAAb,CAAkCC,aAAlC,EAUAH,GAAGI,KAAH,CAASC,MAAT,CAAgB,2CAAhB,EAA6D;AAC3DC,cAASN,GAAGO,KAAH,CAASC,MAAT,CAAgBC,UADkC;AAE3DC,mBAAc;AAF6C,IAA7D,C;AAVAC,cAAWC,aAAX,CAAyBL,KAAzB,CAA+BE,UAA/B,CAA0CN,aAA1C,GAA0DA,aAA1D",
+  "file": "Appearance.js",
+  "sourcesContent": [
+    "/* ************************************************************************\n\n   Copyright: 2018 Christian Boulanger\n\n   License: MIT license\n\n   Authors: Christian Boulanger (cboulanger) info@bibliograph.org\n\n************************************************************************ */\n\nqx.Theme.define(\"cboulanger.eventrecorder.theme.Appearance\", {\n  extend : qx.theme.indigo.Appearance,\n  appearances : {}\n});\n"
+  ]
+}

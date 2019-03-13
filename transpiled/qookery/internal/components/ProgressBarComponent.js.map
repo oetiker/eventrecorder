@@ -1,0 +1,44 @@
+{
+  "version": 3,
+  "sources": [
+    "/home/travis/build/cboulanger/eventrecorder/contrib/ergobyte_qookery_v0.7.0-pre/qookery/source/class/qookery/internal/components/ProgressBarComponent.js"
+  ],
+  "names": [
+    "qx",
+    "Bootstrap",
+    "executePendingDefers",
+    "$$dbClassInfo",
+    "Class",
+    "define",
+    "extend",
+    "qookery",
+    "internal",
+    "components",
+    "Component",
+    "construct",
+    "parentComponent",
+    "members",
+    "getAttributeType",
+    "attributeName",
+    "_createWidgets",
+    "progressBar",
+    "ui",
+    "indicator",
+    "ProgressBar",
+    "_applyAttribute",
+    "_applyWidgetAttributes",
+    "getMaximum",
+    "getMainWidget",
+    "setMaximum",
+    "maximum",
+    "getValue",
+    "setValue",
+    "value",
+    "ProgressBarComponent"
+  ],
+  "mappings": ";;;;;;;;;;;;;;AAAAA,IAAGC,SAAH,CAAaC,oBAAb,CAAkCC,aAAlC,EAkBAH,GAAGI,KAAH,CAASC,MAAT,CAAgB,kDAAhB,EAAoE;;AAEnEC,UAAQC,QAAQC,QAAR,CAAiBC,UAAjB,CAA4BC,SAF+B;;AAInEC,aAAW,mBAASC,eAAT,EAA0B;AACpC,gEAAqBA,eAArB;AACA,GANkE;;AAQnEC,WAAS;;AAER;;AAEAC,qBAAkB,0BAASC,aAAT,EAAwB;AACzC,YAAOA,aAAP;AACA,UAAK,SAAL;AAAgB,aAAO,QAAP;AADhB;AAGA,uGAA4BA,aAA5B;AACA,IATO;;AAWR;;AAEAC,mBAAgB,0BAAW;AAC1B,QAAIC,cAAc,IAAIjB,GAAGkB,EAAH,CAAMC,SAAN,CAAgBC,WAApB,EAAlB;AACA,SAAKC,eAAL,CAAqB,SAArB,EAAgCJ,WAAhC,EAA6C,SAA7C;AACA,SAAKK,sBAAL,CAA4BL,WAA5B;AACA,WAAO,CAAEA,WAAF,CAAP;AACA,IAlBO;;AAoBR;;AAEAM,eAAY,sBAAW;AACtB,WAAO,KAAKC,aAAL,GAAqBD,UAArB,EAAP;AACA,IAxBO;;AA0BRE,eAAY,oBAASC,OAAT,EAAkB;AAC7B,SAAKF,aAAL,GAAqBC,UAArB,CAAgCC,OAAhC;AACA,IA5BO;;AA8BRC,aAAU,oBAAW;AACpB,WAAO,KAAKH,aAAL,GAAqBG,QAArB,EAAP;AACA,IAhCO;;AAkCRC,aAAU,kBAASC,KAAT,EAAgB;AACzB,WAAO,KAAKL,aAAL,GAAqBI,QAArB,CAA8BC,KAA9B,CAAP;AACA;AApCO;AAR0D,EAApE,C;AAlBAtB,SAAQC,QAAR,CAAiBC,UAAjB,CAA4BqB,oBAA5B,CAAiD3B,aAAjD,GAAiEA,aAAjE",
+  "file": "ProgressBarComponent.js",
+  "sourcesContent": [
+    "/*\n\tQookery - Declarative UI Building for Qooxdoo\n\n\tCopyright (c) Ergobyte Informatics S.A., www.ergobyte.gr\n\n\tLicensed under the Apache License, Version 2.0 (the \"License\");\n\tyou may not use this file except in compliance with the License.\n\tYou may obtain a copy of the License at\n\n\t\thttp://www.apache.org/licenses/LICENSE-2.0\n\n\tUnless required by applicable law or agreed to in writing, software\n\tdistributed under the License is distributed on an \"AS IS\" BASIS,\n\tWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n\tSee the License for the specific language governing permissions and\n\tlimitations under the License.\n*/\n\nqx.Class.define(\"qookery.internal.components.ProgressBarComponent\", {\n\n\textend: qookery.internal.components.Component,\n\n\tconstruct: function(parentComponent) {\n\t\tthis.base(arguments, parentComponent);\n\t},\n\n\tmembers: {\n\n\t\t// Metadata\n\n\t\tgetAttributeType: function(attributeName) {\n\t\t\tswitch(attributeName) {\n\t\t\tcase \"maximum\": return \"Number\";\n\t\t\t}\n\t\t\treturn this.base(arguments, attributeName);\n\t\t},\n\n\t\t// Creation\n\n\t\t_createWidgets: function() {\n\t\t\tvar progressBar = new qx.ui.indicator.ProgressBar();\n\t\t\tthis._applyAttribute(\"maximum\", progressBar, \"maximum\");\n\t\t\tthis._applyWidgetAttributes(progressBar);\n\t\t\treturn [ progressBar ];\n\t\t},\n\n\t\t// Public methods\n\n\t\tgetMaximum: function() {\n\t\t\treturn this.getMainWidget().getMaximum();\n\t\t},\n\n\t\tsetMaximum: function(maximum) {\n\t\t\tthis.getMainWidget().setMaximum(maximum);\n\t\t},\n\n\t\tgetValue: function() {\n\t\t\treturn this.getMainWidget().getValue();\n\t\t},\n\n\t\tsetValue: function(value) {\n\t\t\treturn this.getMainWidget().setValue(value);\n\t\t}\n\t}\n});\n"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "version": 3,
+  "sources": [
+    "/home/travis/build/cboulanger/eventrecorder/contrib/ergobyte_qookery_v0.7.0-pre/qookery/source/class/qookery/internal/layouts/GrowLayoutFactory.js"
+  ],
+  "names": [
+    "qx",
+    "Bootstrap",
+    "executePendingDefers",
+    "$$dbClassInfo",
+    "Class",
+    "define",
+    "extend",
+    "core",
+    "Object",
+    "implement",
+    "qookery",
+    "ILayoutFactory",
+    "type",
+    "members",
+    "createLayout",
+    "attributes",
+    "layout",
+    "ui",
+    "Grow",
+    "internal",
+    "layouts",
+    "GrowLayoutFactory"
+  ],
+  "mappings": ";;;;;;;;;;;;;;;;AAAAA,IAAGC,SAAH,CAAaC,oBAAb,CAAkCC,aAAlC,EAkBAH,GAAGI,KAAH,CAASC,MAAT,CAAgB,4CAAhB,EAA8D;;AAE7DC,UAAQN,GAAGO,IAAH,CAAQC,MAF6C;AAG7DC,aAAW,CAAEC,QAAQC,cAAV,CAHkD;AAI7DC,QAAM,WAJuD;;AAM7DC,WAAS;;AAERC,iBAAc,sBAASC,UAAT,EAAqB;AAClC,QAAIC,SAAS,IAAIhB,GAAGiB,EAAH,CAAMD,MAAN,CAAaE,IAAjB,EAAb;AACA,WAAOF,MAAP;AACA;AALO;AANoD,EAA9D,C;AAlBAN,SAAQS,QAAR,CAAiBC,OAAjB,CAAyBC,iBAAzB,CAA2ClB,aAA3C,GAA2DA,aAA3D",
+  "file": "GrowLayoutFactory.js",
+  "sourcesContent": [
+    "/*\n\tQookery - Declarative UI Building for Qooxdoo\n\n\tCopyright (c) Ergobyte Informatics S.A., www.ergobyte.gr\n\n\tLicensed under the Apache License, Version 2.0 (the \"License\");\n\tyou may not use this file except in compliance with the License.\n\tYou may obtain a copy of the License at\n\n\t\thttp://www.apache.org/licenses/LICENSE-2.0\n\n\tUnless required by applicable law or agreed to in writing, software\n\tdistributed under the License is distributed on an \"AS IS\" BASIS,\n\tWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n\tSee the License for the specific language governing permissions and\n\tlimitations under the License.\n*/\n\nqx.Class.define(\"qookery.internal.layouts.GrowLayoutFactory\", {\n\n\textend: qx.core.Object,\n\timplement: [ qookery.ILayoutFactory ],\n\ttype: \"singleton\",\n\n\tmembers: {\n\n\t\tcreateLayout: function(attributes) {\n\t\t\tvar layout = new qx.ui.layout.Grow();\n\t\t\treturn layout;\n\t\t}\n\t}\n});\n"
+  ]
+}

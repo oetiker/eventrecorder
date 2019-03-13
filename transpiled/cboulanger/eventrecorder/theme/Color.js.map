@@ -1,0 +1,26 @@
+{
+  "version": 3,
+  "sources": [
+    "/home/travis/build/cboulanger/eventrecorder/source/class/cboulanger/eventrecorder/theme/Color.js"
+  ],
+  "names": [
+    "qx",
+    "Bootstrap",
+    "executePendingDefers",
+    "$$dbClassInfo",
+    "Theme",
+    "define",
+    "extend",
+    "theme",
+    "indigo",
+    "Color",
+    "colors",
+    "cboulanger",
+    "eventrecorder"
+  ],
+  "mappings": ";;;;;;;;;;;;AAAAA,MAAGC,SAAH,CAAaC,oBAAb,CAAkCC,aAAlC,EAUAH,GAAGI,KAAH,CAASC,MAAT,CAAgB,sCAAhB,EAAwD;AACtDC,cAASN,GAAGO,KAAH,CAASC,MAAT,CAAgBC,KAD6B;AAEtDC,cAAS;AAF6C,IAAxD,C;AAVAC,cAAWC,aAAX,CAAyBL,KAAzB,CAA+BE,KAA/B,CAAqCN,aAArC,GAAqDA,aAArD",
+  "file": "Color.js",
+  "sourcesContent": [
+    "/* ************************************************************************\n\n   Copyright: 2018 Christian Boulanger\n\n   License: MIT license\n\n   Authors: Christian Boulanger (cboulanger) info@bibliograph.org\n\n************************************************************************ */\n\nqx.Theme.define(\"cboulanger.eventrecorder.theme.Color\", {\n  extend : qx.theme.indigo.Color,\n  colors : {}\n});\n"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "version": 3,
+  "sources": [
+    "/home/travis/build/cboulanger/eventrecorder/contrib/ergobyte_qookery_v0.7.0-pre/qookeryace/source/class/qookery/ace/Bootstrap.js"
+  ],
+  "names": [
+    "qx",
+    "Bootstrap",
+    "executePendingDefers",
+    "$$dbClassInfo",
+    "define",
+    "defer",
+    "qookery",
+    "Qookery",
+    "getRegistry",
+    "registerLibrary",
+    "registerComponentType",
+    "ace",
+    "internal",
+    "AceComponent"
+  ],
+  "mappings": ";;;;;;;;;;;;;;;AAAAA,IAAGC,SAAH,CAAaC,oBAAb,CAAkCC,aAAlC,EAkBAH,GAAGC,SAAH,CAAaG,MAAb,CAAoB,uBAApB,EAA6C;;AAE5CC,SAAO,iBAAW;AACjBC,WAAQC,OAAR,CAAgBC,WAAhB,GAA8BC,eAA9B,CAA8C,KAA9C,EAAqD,CAAE,oCAAF,CAArD;AACAH,WAAQC,OAAR,CAAgBC,WAAhB,GAA8BC,eAA9B,CAA8C,kBAA9C,EAAkE,CAAE,mDAAF,CAAlE;AACAH,WAAQC,OAAR,CAAgBC,WAAhB,GAA8BE,qBAA9B,CAAoD,4CAApD,EAAkGJ,QAAQK,GAAR,CAAYC,QAAZ,CAAqBC,YAAvH;AACA;AAN2C,EAA7C,C;AAlBAP,SAAQK,GAAR,CAAYV,SAAZ,CAAsBE,aAAtB,GAAsCA,aAAtC",
+  "file": "Bootstrap.js",
+  "sourcesContent": [
+    "/*\n\tQookery - Declarative UI Building for Qooxdoo\n\n\tCopyright (c) Ergobyte Informatics S.A., www.ergobyte.gr\n\n\tLicensed under the Apache License, Version 2.0 (the \"License\");\n\tyou may not use this file except in compliance with the License.\n\tYou may obtain a copy of the License at\n\n\t\thttp://www.apache.org/licenses/LICENSE-2.0\n\n\tUnless required by applicable law or agreed to in writing, software\n\tdistributed under the License is distributed on an \"AS IS\" BASIS,\n\tWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n\tSee the License for the specific language governing permissions and\n\tlimitations under the License.\n*/\n\nqx.Bootstrap.define(\"qookery.ace.Bootstrap\", {\n\n\tdefer: function() {\n\t\tqookery.Qookery.getRegistry().registerLibrary(\"ace\", [ \"${q:external-libraries}/ace/ace.js\" ]);\n\t\tqookery.Qookery.getRegistry().registerLibrary(\"aceLanguageTools\", [ \"${q:external-libraries}/ace/ext-language_tools.js\" ]);\n\t\tqookery.Qookery.getRegistry().registerComponentType(\"{http://www.qookery.org/ns/Form/Ace}editor\", qookery.ace.internal.AceComponent);\n\t}\n});\n"
+  ]
+}

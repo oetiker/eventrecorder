@@ -1,0 +1,53 @@
+{
+  "version": 3,
+  "sources": [
+    "/home/travis/build/cboulanger/eventrecorder/contrib/ergobyte_qookery_v0.7.0-pre/qookery/source/class/qookery/internal/layouts/FlowLayoutFactory.js"
+  ],
+  "names": [
+    "qx",
+    "Bootstrap",
+    "executePendingDefers",
+    "$$dbClassInfo",
+    "Class",
+    "define",
+    "extend",
+    "core",
+    "Object",
+    "implement",
+    "qookery",
+    "ILayoutFactory",
+    "type",
+    "members",
+    "createLayout",
+    "attributes",
+    "defaultSpacingX",
+    "Qookery",
+    "getOption",
+    "OPTION_DEFAULT_LAYOUT_SPACING_X",
+    "defaultSpacingY",
+    "OPTION_DEFAULT_LAYOUT_SPACING_Y",
+    "layout",
+    "ui",
+    "Flow",
+    "alignX",
+    "getAttribute",
+    "setAlignX",
+    "alignY",
+    "setAlignY",
+    "reversed",
+    "setReversed",
+    "spacing",
+    "setSpacingX",
+    "setSpacingY",
+    "spacingX",
+    "spacingY",
+    "internal",
+    "layouts",
+    "FlowLayoutFactory"
+  ],
+  "mappings": ";;;;;;;;;;;;;;;;;AAAAA,IAAGC,SAAH,CAAaC,oBAAb,CAAkCC,aAAlC,EAkBAH,GAAGI,KAAH,CAASC,MAAT,CAAgB,4CAAhB,EAA8D;;AAE7DC,UAAQN,GAAGO,IAAH,CAAQC,MAF6C;AAG7DC,aAAW,CAAEC,QAAQC,cAAV,CAHkD;AAI7DC,QAAM,WAJuD;;AAM7DC,WAAS;;AAERC,iBAAc,sBAASC,UAAT,EAAqB;AAClC,QAAIC,kBAAkBN,QAAQO,OAAR,CAAgBC,SAAhB,CAA0BR,QAAQO,OAAR,CAAgBE,+BAA1C,EAA2E,CAA3E,CAAtB;AACA,QAAIC,kBAAkBV,QAAQO,OAAR,CAAgBC,SAAhB,CAA0BR,QAAQO,OAAR,CAAgBI,+BAA1C,EAA2E,CAA3E,CAAtB;AACA,QAAIC,SAAS,IAAItB,GAAGuB,EAAH,CAAMD,MAAN,CAAaE,IAAjB,CAAsBR,eAAtB,EAAuCI,eAAvC,EAAwD,MAAxD,CAAb;AACA,QAAIK,SAASV,WAAWW,YAAX,CAAwB,gBAAxB,CAAb;AACA,QAAGD,UAAU,IAAb,EACCH,OAAOK,SAAP,CAAiBF,MAAjB;AACD,QAAIG,SAASb,WAAWW,YAAX,CAAwB,gBAAxB,CAAb;AACA,QAAGE,UAAU,IAAb,EACCN,OAAOO,SAAP,CAAiBD,MAAjB;AACD,QAAIE,WAAWf,WAAWW,YAAX,CAAwB,UAAxB,CAAf;AACA,QAAGI,YAAY,IAAf,EACCR,OAAOS,WAAP,CAAmBD,QAAnB;AACD,QAAIE,UAAUjB,WAAWW,YAAX,CAAwB,SAAxB,CAAd;AACA,QAAGM,WAAW,IAAd,EAAoB;AACnBV,YAAOW,WAAP,CAAmBD,OAAnB;AACAV,YAAOY,WAAP,CAAmBF,OAAnB;AACA;AACD,QAAIG,WAAWpB,WAAWW,YAAX,CAAwB,WAAxB,CAAf;AACA,QAAGS,YAAY,IAAf,EACCb,OAAOW,WAAP,CAAmBE,QAAnB;AACD,QAAIC,WAAWrB,WAAWW,YAAX,CAAwB,WAAxB,CAAf;AACA,QAAGU,YAAY,IAAf,EACCd,OAAOY,WAAP,CAAmBE,QAAnB;AACD,WAAOd,MAAP;AACA;AA3BO;AANoD,EAA9D,C;AAlBAZ,SAAQ2B,QAAR,CAAiBC,OAAjB,CAAyBC,iBAAzB,CAA2CpC,aAA3C,GAA2DA,aAA3D",
+  "file": "FlowLayoutFactory.js",
+  "sourcesContent": [
+    "/*\n\tQookery - Declarative UI Building for Qooxdoo\n\n\tCopyright (c) Ergobyte Informatics S.A., www.ergobyte.gr\n\n\tLicensed under the Apache License, Version 2.0 (the \"License\");\n\tyou may not use this file except in compliance with the License.\n\tYou may obtain a copy of the License at\n\n\t\thttp://www.apache.org/licenses/LICENSE-2.0\n\n\tUnless required by applicable law or agreed to in writing, software\n\tdistributed under the License is distributed on an \"AS IS\" BASIS,\n\tWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n\tSee the License for the specific language governing permissions and\n\tlimitations under the License.\n*/\n\nqx.Class.define(\"qookery.internal.layouts.FlowLayoutFactory\", {\n\n\textend: qx.core.Object,\n\timplement: [ qookery.ILayoutFactory ],\n\ttype: \"singleton\",\n\n\tmembers: {\n\n\t\tcreateLayout: function(attributes) {\n\t\t\tvar defaultSpacingX = qookery.Qookery.getOption(qookery.Qookery.OPTION_DEFAULT_LAYOUT_SPACING_X, 0);\n\t\t\tvar defaultSpacingY = qookery.Qookery.getOption(qookery.Qookery.OPTION_DEFAULT_LAYOUT_SPACING_Y, 0);\n\t\t\tvar layout = new qx.ui.layout.Flow(defaultSpacingX, defaultSpacingY, \"left\");\n\t\t\tvar alignX = attributes.getAttribute(\"layout-align-x\");\n\t\t\tif(alignX != null)\n\t\t\t\tlayout.setAlignX(alignX);\n\t\t\tvar alignY = attributes.getAttribute(\"layout-align-y\");\n\t\t\tif(alignY != null)\n\t\t\t\tlayout.setAlignY(alignY);\n\t\t\tvar reversed = attributes.getAttribute(\"reversed\");\n\t\t\tif(reversed != null)\n\t\t\t\tlayout.setReversed(reversed);\n\t\t\tvar spacing = attributes.getAttribute(\"spacing\");\n\t\t\tif(spacing != null) {\n\t\t\t\tlayout.setSpacingX(spacing);\n\t\t\t\tlayout.setSpacingY(spacing);\n\t\t\t}\n\t\t\tvar spacingX = attributes.getAttribute(\"spacing-x\");\n\t\t\tif(spacingX != null)\n\t\t\t\tlayout.setSpacingX(spacingX);\n\t\t\tvar spacingY = attributes.getAttribute(\"spacing-y\");\n\t\t\tif(spacingY != null)\n\t\t\t\tlayout.setSpacingY(spacingY);\n\t\t\treturn layout;\n\t\t}\n\t}\n});\n"
+  ]
+}

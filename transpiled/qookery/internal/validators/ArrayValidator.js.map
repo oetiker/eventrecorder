@@ -1,0 +1,44 @@
+{
+  "version": 3,
+  "sources": [
+    "/home/travis/build/cboulanger/eventrecorder/contrib/ergobyte_qookery_v0.7.0-pre/qookery/source/class/qookery/internal/validators/ArrayValidator.js"
+  ],
+  "names": [
+    "qx",
+    "Bootstrap",
+    "executePendingDefers",
+    "$$dbClassInfo",
+    "Class",
+    "define",
+    "extend",
+    "core",
+    "Object",
+    "implement",
+    "qookery",
+    "IValidator",
+    "type",
+    "construct",
+    "members",
+    "createValidation",
+    "component",
+    "invalidMessage",
+    "options",
+    "value",
+    "message",
+    "length",
+    "parseInt",
+    "locale",
+    "Manager",
+    "tr",
+    "util",
+    "ValidationError",
+    "internal",
+    "validators",
+    "ArrayValidator"
+  ],
+  "mappings": ";;;;;;;;;;;;;;;;;;AAAAA,IAAGC,SAAH,CAAaC,oBAAb,CAAkCC,aAAlC,EAkBAH,GAAGI,KAAH,CAASC,MAAT,CAAgB,4CAAhB,EAA8D;;AAE7DC,UAAQN,GAAGO,IAAH,CAAQC,MAF6C;AAG7DC,aAAW,CAAEC,QAAQC,UAAV,CAHkD;AAI7DC,QAAM,WAJuD;;AAM7DC,aAAW,qBAAY;AACtB;AACA,GAR4D;;AAU7DC,WAAS;;AAERC,qBAAkB,0BAASC,SAAT,EAAoBC,cAApB,EAAoCC,OAApC,EAA6C;AAC9D,WAAO,UAASC,KAAT,EAAgB;AACtB,SAAGA,UAAU,IAAb,EAAmB,OAAO,IAAP;AACnB,SAAIC,UAAU,IAAd;AACA,SAAGF,QAAQ,eAAR,KAA4BC,MAAME,MAAN,GAAeC,SAASJ,QAAQ,eAAR,CAAT,EAAmC,EAAnC,CAA9C,EAAsF;AACrFE,gBAAUH,kBAAkBjB,GAAGuB,MAAH,CAAUC,OAAV,CAAkBC,EAAlB,CAAqB,0DAArB,EAAiFP,QAAQ,eAAR,CAAjF,CAA5B;AACA,MAFD,MAGK,IAAGA,QAAQ,eAAR,KAA4BC,MAAME,MAAN,GAAeC,SAASJ,QAAQ,eAAR,CAAT,EAAmC,EAAnC,CAA9C,EAAsF;AAC1FE,gBAAUH,kBAAkBjB,GAAGuB,MAAH,CAAUC,OAAV,CAAkBC,EAAlB,CAAqB,0DAArB,EAAiFP,QAAQ,eAAR,CAAjF,CAA5B;AACA;AACD,SAAG,CAACE,OAAJ,EAAa,OAAO,IAAP;AACb,YAAO,IAAIV,QAAQgB,IAAR,CAAaC,eAAjB,CAAiCX,SAAjC,EAA4CI,OAA5C,EAAqD,IAArD,CAAP;AACA,KAXD;AAYA;AAfO;AAVoD,EAA9D,C;AAlBAV,SAAQkB,QAAR,CAAiBC,UAAjB,CAA4BC,cAA5B,CAA2C3B,aAA3C,GAA2DA,aAA3D",
+  "file": "ArrayValidator.js",
+  "sourcesContent": [
+    "/*\n\tQookery - Declarative UI Building for Qooxdoo\n\n\tCopyright (c) Ergobyte Informatics S.A., www.ergobyte.gr\n\n\tLicensed under the Apache License, Version 2.0 (the \"License\");\n\tyou may not use this file except in compliance with the License.\n\tYou may obtain a copy of the License at\n\n\t\thttp://www.apache.org/licenses/LICENSE-2.0\n\n\tUnless required by applicable law or agreed to in writing, software\n\tdistributed under the License is distributed on an \"AS IS\" BASIS,\n\tWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n\tSee the License for the specific language governing permissions and\n\tlimitations under the License.\n*/\n\nqx.Class.define(\"qookery.internal.validators.ArrayValidator\", {\n\n\textend: qx.core.Object,\n\timplement: [ qookery.IValidator ],\n\ttype: \"singleton\",\n\n\tconstruct: function () {\n\t\tthis.base(arguments);\n\t},\n\n\tmembers: {\n\n\t\tcreateValidation: function(component, invalidMessage, options) {\n\t\t\treturn function(value) {\n\t\t\t\tif(value === null) return null;\n\t\t\t\tvar message = null;\n\t\t\t\tif(options[\"minimumLength\"] && value.length < parseInt(options[\"minimumLength\"], 10)) {\n\t\t\t\t\tmessage = invalidMessage || qx.locale.Manager.tr(\"qookery.internal.validators.ArrayValidator.minimumLength\", options[\"minimumLength\"]);\n\t\t\t\t}\n\t\t\t\telse if(options[\"maximumLength\"] && value.length > parseInt(options[\"maximumLength\"], 10)) {\n\t\t\t\t\tmessage = invalidMessage || qx.locale.Manager.tr(\"qookery.internal.validators.ArrayValidator.maximumLength\", options[\"maximumLength\"]);\n\t\t\t\t}\n\t\t\t\tif(!message) return null;\n\t\t\t\treturn new qookery.util.ValidationError(component, message, null);\n\t\t\t};\n\t\t}\n\t}\n});\n"
+  ]
+}

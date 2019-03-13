@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "sources": [
+    "/home/travis/build/cboulanger/eventrecorder/contrib/ergobyte_qookery_v0.7.0-pre/qookery/source/class/qookery/internal/components/SeparatorComponent.js"
+  ],
+  "names": [
+    "qx",
+    "Bootstrap",
+    "executePendingDefers",
+    "$$dbClassInfo",
+    "Class",
+    "define",
+    "extend",
+    "qookery",
+    "internal",
+    "components",
+    "Component",
+    "construct",
+    "parentComponent",
+    "members",
+    "_createWidgets",
+    "separator",
+    "ui",
+    "core",
+    "Widget",
+    "setBackgroundColor",
+    "getAttribute",
+    "set",
+    "decorator",
+    "width",
+    "height",
+    "allowStretchX",
+    "allowStretchY",
+    "Error",
+    "_applyWidgetAttributes",
+    "SeparatorComponent"
+  ],
+  "mappings": ";;;;;;;;;;;;;;AAAAA,IAAGC,SAAH,CAAaC,oBAAb,CAAkCC,aAAlC,EAkBAH,GAAGI,KAAH,CAASC,MAAT,CAAgB,gDAAhB,EAAkE;;AAEjEC,UAAQC,QAAQC,QAAR,CAAiBC,UAAjB,CAA4BC,SAF6B;;AAIjEC,aAAW,mBAASC,eAAT,EAA0B;AACpC,gEAAqBA,eAArB;AACA,GANgE;;AAQjEC,WAAS;;AAERC,mBAAgB,0BAAW;AAC1B,QAAIC,YAAY,IAAIf,GAAGgB,EAAH,CAAMC,IAAN,CAAWC,MAAf,EAAhB;AACAH,cAAUI,kBAAV,CAA6B,kBAA7B;AACA,YAAO,KAAKC,YAAL,CAAkB,SAAlB,EAA6B,YAA7B,CAAP;AACA,UAAK,YAAL;AACCL,gBAAUM,GAAV,CAAc,EAAEC,WAAW,sBAAb,EAAqCC,OAAO,EAA5C,EAAgDC,QAAQ,CAAxD,EAA2DC,eAAe,IAA1E,EAAgFC,eAAe,KAA/F,EAAd;AACA;AACD,UAAK,UAAL;AACCX,gBAAUM,GAAV,CAAc,EAAEC,WAAW,oBAAb,EAAmCC,OAAO,CAA1C,EAA6CC,QAAQ,EAArD,EAAyDC,eAAe,KAAxE,EAA+EC,eAAe,IAA9F,EAAd;AACA;AACD;AACC,YAAM,IAAIC,KAAJ,CAAU,2BAAV,CAAN;AARD;AAUA,SAAKC,sBAAL,CAA4Bb,SAA5B;AACA,WAAO,CAAEA,SAAF,CAAP;AACA;AAjBO;AARwD,EAAlE,C;AAlBAR,SAAQC,QAAR,CAAiBC,UAAjB,CAA4BoB,kBAA5B,CAA+C1B,aAA/C,GAA+DA,aAA/D",
+  "file": "SeparatorComponent.js",
+  "sourcesContent": [
+    "/*\n\tQookery - Declarative UI Building for Qooxdoo\n\n\tCopyright (c) Ergobyte Informatics S.A., www.ergobyte.gr\n\n\tLicensed under the Apache License, Version 2.0 (the \"License\");\n\tyou may not use this file except in compliance with the License.\n\tYou may obtain a copy of the License at\n\n\t\thttp://www.apache.org/licenses/LICENSE-2.0\n\n\tUnless required by applicable law or agreed to in writing, software\n\tdistributed under the License is distributed on an \"AS IS\" BASIS,\n\tWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n\tSee the License for the specific language governing permissions and\n\tlimitations under the License.\n*/\n\nqx.Class.define(\"qookery.internal.components.SeparatorComponent\", {\n\n\textend: qookery.internal.components.Component,\n\n\tconstruct: function(parentComponent) {\n\t\tthis.base(arguments, parentComponent);\n\t},\n\n\tmembers: {\n\n\t\t_createWidgets: function() {\n\t\t\tvar separator = new qx.ui.core.Widget();\n\t\t\tseparator.setBackgroundColor(\"border-separator\");\n\t\t\tswitch(this.getAttribute(\"variant\", \"horizontal\")) {\n\t\t\tcase \"horizontal\":\n\t\t\t\tseparator.set({ decorator: \"separator-horizontal\", width: 10, height: 1, allowStretchX: true, allowStretchY: false });\n\t\t\t\tbreak;\n\t\t\tcase \"vertical\":\n\t\t\t\tseparator.set({ decorator: \"separator-vertical\", width: 1, height: 10, allowStretchX: false, allowStretchY: true });\n\t\t\t\tbreak;\n\t\t\tdefault:\n\t\t\t\tthrow new Error(\"Unknown separator variant\");\n\t\t\t}\n\t\t\tthis._applyWidgetAttributes(separator);\n\t\t\treturn [ separator ];\n\t\t}\n\t}\n});\n"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "version": 3,
+  "sources": [
+    "/home/travis/build/cboulanger/eventrecorder/contrib/ergobyte_qookery_v0.7.0-pre/qookery/source/class/qookery/IEditableComponent.js"
+  ],
+  "names": [
+    "qx",
+    "Bootstrap",
+    "executePendingDefers",
+    "$$dbClassInfo",
+    "Interface",
+    "define",
+    "extend",
+    "qookery",
+    "IComponent",
+    "properties",
+    "value",
+    "event",
+    "label",
+    "check",
+    "nullable",
+    "toolTipText",
+    "required",
+    "init",
+    "valid",
+    "format",
+    "readOnly",
+    "members",
+    "updateUI",
+    "connect",
+    "connectionSpecification",
+    "disconnect",
+    "addValidation",
+    "validatorType",
+    "invalidMessage",
+    "options",
+    "removeValidation",
+    "validation",
+    "removeAllValidations",
+    "IEditableComponent"
+  ],
+  "mappings": ";;;;;;;;;;;;AAAAA,IAAGC,SAAH,CAAaC,oBAAb,CAAkCC,aAAlC,EAqBAH,GAAGI,SAAH,CAAaC,MAAb,CAAoB,4BAApB,EAAkD;;AAEjDC,UAAQC,QAAQC,UAFiC;;AAIjDC,cAAY;;AAEX;AACAC,UAAO,EAAEC,OAAO,aAAT,EAHI;;AAKX;AACAC,UAAO,EAAEC,OAAO,QAAT,EAAmBC,UAAU,IAA7B,EANI;;AAQX;AACAC,gBAAa,EAAEF,OAAO,QAAT,EAAmBC,UAAU,IAA7B,EATF;;AAWX;AACAE,aAAU,EAAEH,OAAO,SAAT,EAAoBC,UAAU,KAA9B,EAAqCG,MAAM,KAA3C,EAZC;;AAcX;AACAC,UAAO,EAAEL,OAAO,SAAT,EAAoBC,UAAU,KAA9B,EAAqCG,MAAM,IAA3C,EAfI;;AAiBX;AACAE,WAAQ,EAAEN,OAAO,wBAAT,EAAmCC,UAAU,IAA7C,EAlBG;;AAoBX;AACAM,aAAU,EAAEP,OAAO,SAAT,EAAoBC,UAAU,KAA9B,EAAqCG,MAAM,KAA3C;AArBC,GAJqC;;AA4BjDI,WAAS;;AAER;;AAEA;;;;;;;;;AASAC,aAAU,kBAASZ,KAAT,EAAgB,CAAG,CAbrB;;AAeR;;AAEA;;;;;;;AAOAa,YAAS,iBAASC,uBAAT,EAAkC,CAAG,CAxBtC;;AA0BR;;;AAGAC,eAAY,sBAAW,CAAG,CA7BlB;;AA+BR;;AAEA;;;;;;;;;AASAC,kBAAe,uBAASC,aAAT,EAAwBC,cAAxB,EAAwCC,OAAxC,EAAiD,CAAG,CA1C3D;;AA4CR;;;;;AAKAC,qBAAkB,0BAASC,UAAT,EAAqB,CAAG,CAjDlC;;AAmDR;;;AAGAC,yBAAsB,gCAAW,CAAG;AAtD5B;AA5BwC,EAAlD,C;AArBAzB,SAAQ0B,kBAAR,CAA2B9B,aAA3B,GAA2CA,aAA3C",
+  "file": "IEditableComponent.js",
+  "sourcesContent": [
+    "/*\n\tQookery - Declarative UI Building for Qooxdoo\n\n\tCopyright (c) Ergobyte Informatics S.A., www.ergobyte.gr\n\n\tLicensed under the Apache License, Version 2.0 (the \"License\");\n\tyou may not use this file except in compliance with the License.\n\tYou may obtain a copy of the License at\n\n\t\thttp://www.apache.org/licenses/LICENSE-2.0\n\n\tUnless required by applicable law or agreed to in writing, software\n\tdistributed under the License is distributed on an \"AS IS\" BASIS,\n\tWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n\tSee the License for the specific language governing permissions and\n\tlimitations under the License.\n*/\n\n/**\n * Interface for components that support value editing\n */\nqx.Interface.define(\"qookery.IEditableComponent\", {\n\n\textend: qookery.IComponent,\n\n\tproperties: {\n\n\t\t/** Component's current value */\n\t\tvalue: { event: \"changeValue\" },\n\n\t\t/** Label which will be displayed close to component's interactive widgets */\n\t\tlabel: { check: \"String\", nullable: true },\n\n\t\t/** Tooltip text to display when the user hovers the mouse over the component's interactive widgets */\n\t\ttoolTipText: { check: \"String\", nullable: true },\n\n\t\t/** Whether the component's value is required */\n\t\trequired: { check: \"Boolean\", nullable: false, init: false },\n\n\t\t/** Whether the component's widget state is valid or not */\n\t\tvalid: { check: \"Boolean\", nullable: false, init: true },\n\n\t\t/** A format to be used when displaying values */\n\t\tformat: { check: \"qx.util.format.IFormat\", nullable: true },\n\n\t\t/** If true, this editor's value cannot be altered by its UI widgets */\n\t\treadOnly: { check: \"Boolean\", nullable: false, init: false }\n\t},\n\n\tmembers: {\n\n\t\t// User interface\n\n\t\t/**\n\t\t * Update the component's user interface to reflect given value\n\t\t *\n\t\t * <p>This method will do nothing in case an update is already in progress or the component has been disposed</p>\n\t\t *\n\t\t * @param value {any?} if <code>undefined</code>, automatically use component's current value\n\t\t *\n\t\t * @retun {Boolean} <code>true</code> in case the update was performed\n\t\t */\n\t\tupdateUI: function(value) { },\n\n\t\t// Model connection\n\n\t\t/**\n\t\t * Create a two way binding between form's model and component's value\n\t\t *\n\t\t * <p>This method will automatically disconnect existing connection, if any.</p>\n\t\t *\n\t\t * @param connectionSpecification {String} a model-provider specific specification, instrumenting connection\n\t\t */\n\t\tconnect: function(connectionSpecification) { },\n\n\t\t/**\n\t\t * Remove connection created by #connect(), if any\n\t\t */\n\t\tdisconnect: function() { },\n\n\t\t// Validation\n\n\t\t/**\n\t\t * Add a validation to this component\n\t\t *\n\t\t * @param validatorType {String} name of a registered Qookery validator\n\t\t * @param invalidMessage {String?null} error message to use in case of validation failure, <code>null</code> for default one(s)\n\t\t * @param options {Map?null} validator specific options\n\t\t *\n\t\t * @return {any} an opaque handle that may be used to remove the validation in the future\n\t\t */\n\t\taddValidation: function(validatorType, invalidMessage, options) { },\n\n\t\t/**\n\t\t * Remove a validation from this component\n\t\t *\n\t\t * @param validation {Object} the value returned by a former call to #addValidation()\n\t\t */\n\t\tremoveValidation: function(validation) { },\n\n\t\t/**\n\t\t * Remove all validations from this component\n\t\t */\n\t\tremoveAllValidations: function() { }\n\t}\n});\n"
+  ]
+}

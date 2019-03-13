@@ -1,0 +1,2327 @@
+{
+  "className": "cboulanger.eventrecorder.player.Abstract",
+  "packageName": "cboulanger.eventrecorder.player",
+  "name": "Abstract",
+  "superClass": "qx.core.Object",
+  "interfaces": [],
+  "mixins": [
+    "cboulanger.eventrecorder.MHelperMethods"
+  ],
+  "functionName": null,
+  "clazz": {
+    "location": {
+      "start": {
+        "line": 20,
+        "column": 0
+      },
+      "end": {
+        "line": 877,
+        "column": 3
+      }
+    },
+    "jsdoc": {
+      "@description": [
+        {
+          "name": "@description",
+          "body": "***********************************************************************\n\nUI Event Recorder\n\nCopyright:\n2018 Christian Boulanger\n\nLicense:\nMIT license\nSee the LICENSE file in the project's top-level directory for details.\n\nAuthors: Christian Boulanger\n\n***********************************************************************"
+        },
+        {
+          "name": "@description",
+          "body": "The base class of all player types"
+        }
+      ],
+      "@require": [
+        {
+          "name": "@require",
+          "body": "qx.bom.Element"
+        }
+      ]
+    }
+  },
+  "type": "class",
+  "statics": {
+    "utilityFunctions": {
+      "location": {
+        "start": {
+          "line": 25,
+          "column": 4
+        },
+        "end": {
+          "line": 141,
+          "column": 5
+        }
+      },
+      "type": "variable",
+      "access": "public"
+    }
+  },
+  "properties": {
+    "mode": {
+      "location": {
+        "start": {
+          "line": 152,
+          "column": 4
+        },
+        "end": {
+          "line": 157,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "The replay mode. Possible values:\n\"test\": The script is executed ignoring the \"delay\" commands, errors will\nstop execution and will be thrown.\n\"presentation\": The script is executed with user delays, errors will be\nlogged to the console but will not stop execution"
+          }
+        ]
+      },
+      "name": "mode",
+      "propertyType": "new",
+      "event": "changeMode",
+      "apply": "_applyMode",
+      "init": "presentation",
+      "possibleValues": [
+        "test",
+        "presentation"
+      ],
+      "defaultValue": "presentation"
+    },
+    "timeout": {
+      "location": {
+        "start": {
+          "line": 162,
+          "column": 4
+        },
+        "end": {
+          "line": 165,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "The timeout in milliseconds"
+          }
+        ]
+      },
+      "name": "timeout",
+      "propertyType": "new",
+      "init": 10000,
+      "check": "Number",
+      "defaultValue": 10000
+    },
+    "interval": {
+      "location": {
+        "start": {
+          "line": 170,
+          "column": 4
+        },
+        "end": {
+          "line": 173,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "The interval between checks if waiting for a condition to fulfil"
+          }
+        ]
+      },
+      "name": "interval",
+      "propertyType": "new",
+      "init": 100,
+      "check": "Number",
+      "defaultValue": 100
+    },
+    "useDefaultDelay": {
+      "location": {
+        "start": {
+          "line": 178,
+          "column": 4
+        },
+        "end": {
+          "line": 182,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "if true, ignore user delays and use defaultDelay"
+          }
+        ]
+      },
+      "name": "useDefaultDelay",
+      "propertyType": "new",
+      "nullable": false,
+      "init": false,
+      "allowNull": false,
+      "check": "Boolean",
+      "defaultValue": false
+    },
+    "maxDelay": {
+      "location": {
+        "start": {
+          "line": 187,
+          "column": 4
+        },
+        "end": {
+          "line": 190,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "The maximun delay between events (limits user-generated delay)"
+          }
+        ]
+      },
+      "name": "maxDelay",
+      "propertyType": "new",
+      "init": 1000,
+      "check": "Number",
+      "defaultValue": 1000
+    },
+    "canReplayInBrowser": {
+      "location": {
+        "start": {
+          "line": 195,
+          "column": 4
+        },
+        "end": {
+          "line": 200,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Whether the player can replay the generated script in the browser"
+          }
+        ]
+      },
+      "name": "canReplayInBrowser",
+      "propertyType": "new",
+      "event": "changeCanReplay",
+      "nullable": false,
+      "init": false,
+      "allowNull": false,
+      "check": "Boolean",
+      "defaultValue": false
+    },
+    "canExportExecutableCode": {
+      "location": {
+        "start": {
+          "line": 205,
+          "column": 4
+        },
+        "end": {
+          "line": 210,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Whether the player can export code that can be used outside this application"
+          }
+        ]
+      },
+      "name": "canExportExecutableCode",
+      "propertyType": "new",
+      "event": "changeCanExportExecutableCode",
+      "nullable": false,
+      "init": false,
+      "allowNull": false,
+      "check": "Boolean",
+      "defaultValue": false
+    },
+    "qxOwner": {
+      "type": "property",
+      "name": "qxOwner",
+      "abstract": false,
+      "mixin": true,
+      "access": "public",
+      "overriddenFrom": "qx.core.MObjectId"
+    },
+    "qxObjectId": {
+      "type": "property",
+      "name": "qxObjectId",
+      "abstract": false,
+      "mixin": true,
+      "access": "public",
+      "overriddenFrom": "qx.core.MObjectId"
+    }
+  },
+  "events": {
+    "progress": {
+      "location": {
+        "start": {
+          "line": 218,
+          "column": 4
+        },
+        "end": {
+          "line": 218,
+          "column": 37
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Fired with each step of the replayed script. The event data is an array\ncontaining the number of the step and the number of steps"
+          }
+        ]
+      },
+      "name": "progress",
+      "type": "qx.event.type.Data"
+    }
+  },
+  "construct": {
+    "location": {
+      "start": {
+        "line": 224,
+        "column": 2
+      },
+      "end": {
+        "line": 236,
+        "column": 3
+      }
+    },
+    "jsdoc": {
+      "@description": [
+        {
+          "name": "@description",
+          "body": "constructor"
+        }
+      ]
+    }
+  },
+  "members": {
+    "_globalRef": {
+      "location": {
+        "start": {
+          "line": 246,
+          "column": 4
+        },
+        "end": {
+          "line": 246,
+          "column": 20
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "A globally accessible reference to the player implementation"
+          }
+        ]
+      },
+      "type": "variable",
+      "access": "protected"
+    },
+    "__commands": {
+      "location": {
+        "start": {
+          "line": 251,
+          "column": 4
+        },
+        "end": {
+          "line": 251,
+          "column": 20
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "A list of available commands"
+          }
+        ]
+      },
+      "type": "variable",
+      "access": "private"
+    },
+    "__macros": {
+      "location": {
+        "start": {
+          "line": 257,
+          "column": 4
+        },
+        "end": {
+          "line": 257,
+          "column": 19
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "An object mapping macro names to arrays containing the macro lines"
+          }
+        ],
+        "@var": [
+          {
+            "name": "@var",
+            "body": "{Object}"
+          }
+        ]
+      },
+      "type": "variable",
+      "access": "private"
+    },
+    "__macro_stack": {
+      "location": {
+        "start": {
+          "line": 264,
+          "column": 4
+        },
+        "end": {
+          "line": 264,
+          "column": 23
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "An array of object containing information on the macros that are currently\nbeing defined (in a nested way)"
+          }
+        ],
+        "@var": [
+          {
+            "name": "@var",
+            "body": "{Object[]}"
+          }
+        ]
+      },
+      "type": "variable",
+      "access": "private"
+    },
+    "__macro_stack_index": {
+      "location": {
+        "start": {
+          "line": 270,
+          "column": 4
+        },
+        "end": {
+          "line": 270,
+          "column": 27
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "The index of the macro in the macro stack that is currently defined"
+          }
+        ],
+        "@var": [
+          {
+            "name": "@var",
+            "body": "{Integer}"
+          }
+        ]
+      },
+      "type": "variable",
+      "access": "private"
+    },
+    "__vars": {
+      "location": {
+        "start": {
+          "line": 275,
+          "column": 4
+        },
+        "end": {
+          "line": 275,
+          "column": 16
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Variables"
+          }
+        ]
+      },
+      "type": "variable",
+      "access": "private"
+    },
+    "__promises": {
+      "location": {
+        "start": {
+          "line": 280,
+          "column": 4
+        },
+        "end": {
+          "line": 280,
+          "column": 20
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "An array of promises which are to be awaited"
+          }
+        ]
+      },
+      "type": "variable",
+      "access": "private"
+    },
+    "_applyMode": {
+      "location": {
+        "start": {
+          "line": 288,
+          "column": 4
+        },
+        "end": {
+          "line": 288,
+          "column": 29
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Stub to be overridden if needed"
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "body": "value",
+            "paramName": "value",
+            "type": ""
+          },
+          {
+            "name": "@param",
+            "body": "old",
+            "paramName": "old",
+            "type": ""
+          }
+        ],
+        "@private": [
+          {
+            "name": "@private",
+            "body": ""
+          }
+        ]
+      },
+      "type": "function",
+      "access": "protected",
+      "applyFor": [
+        "mode"
+      ]
+    },
+    "_addCommands": {
+      "location": {
+        "start": {
+          "line": 295,
+          "column": 4
+        },
+        "end": {
+          "line": 297,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "NOT IMPLEMENTED\nAdds the given array of commands"
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "body": "commands {Object[]}"
+          }
+        ]
+      },
+      "type": "function",
+      "access": "protected"
+    },
+    "getCommands": {
+      "location": {
+        "start": {
+          "line": 304,
+          "column": 4
+        },
+        "end": {
+          "line": 306,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "NOT IMPLEMENTED\nReturns the list of availabe commands"
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "body": "{Object[]}",
+            "type": "Object[]",
+            "description": ""
+          }
+        ]
+      },
+      "type": "function",
+      "access": "public"
+    },
+    "_tokenize": {
+      "location": {
+        "start": {
+          "line": 316,
+          "column": 4
+        },
+        "end": {
+          "line": 356,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Simple tokenizer which splits expressions separated by whitespace, but keeps\nexpressions in quotes (which can contain whitespace) together. Parses tokens\nas JSON expressions, but accepts unquoted text as strings."
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "body": "line {String}"
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "body": "{String[]}",
+            "type": "String[]",
+            "description": ""
+          }
+        ],
+        "@private": [
+          {
+            "name": "@private",
+            "body": ""
+          }
+        ]
+      },
+      "type": "function",
+      "access": "protected"
+    },
+    "_translateLine": {
+      "location": {
+        "start": {
+          "line": 365,
+          "column": 4
+        },
+        "end": {
+          "line": 383,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Translates a single line from the intermediate code into the target\nlanguage. To be overridden by subclasses if neccessary."
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "body": "line {String}"
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "body": "{String}",
+            "type": "String",
+            "description": ""
+          }
+        ]
+      },
+      "type": "function",
+      "access": "protected"
+    },
+    "_handleMeta": {
+      "location": {
+        "start": {
+          "line": 394,
+          "column": 4
+        },
+        "end": {
+          "line": 454,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Given a script, return an array of lines with all variable and macro\ndeclarations registered and removed. Optionally, variables are expanded."
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "body": "script {String}"
+          },
+          {
+            "name": "@param",
+            "body": "expandVariables {Boolean} Whether to expand the found variables. Default to true",
+            "paramName": "expandVariables",
+            "description": " Whether to expand the found variables. Default to true",
+            "type": "Boolean"
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "body": "{Array}",
+            "type": "Array",
+            "description": ""
+          }
+        ],
+        "@private": [
+          {
+            "name": "@private",
+            "body": ""
+          }
+        ]
+      },
+      "type": "function",
+      "access": "protected"
+    },
+    "_getMacro": {
+      "location": {
+        "start": {
+          "line": 464,
+          "column": 4
+        },
+        "end": {
+          "line": 474,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Returns the lines for the macro of the given name. If it doesn't exist,\nreturn undefined"
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "body": "macro_name {String}"
+          },
+          {
+            "name": "@param",
+            "body": "args {Array}"
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "body": "{Array|undefined}",
+            "type": "Array|undefined",
+            "description": ""
+          }
+        ],
+        "@private": [
+          {
+            "name": "@private",
+            "body": ""
+          }
+        ]
+      },
+      "type": "function",
+      "access": "protected"
+    },
+    "_defineVariables": {
+      "location": {
+        "start": {
+          "line": 482,
+          "column": 4
+        },
+        "end": {
+          "line": 485,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Returns an array of lines containing variable declarations"
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "body": "{string[]}",
+            "type": "string[]",
+            "description": ""
+          }
+        ],
+        "@private": [
+          {
+            "name": "@private",
+            "body": ""
+          }
+        ]
+      },
+      "type": "function",
+      "access": "protected"
+    },
+    "_translateVariables": {
+      "location": {
+        "start": {
+          "line": 493,
+          "column": 4
+        },
+        "end": {
+          "line": 505,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Translates variables in a line"
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "body": "line {String}"
+          }
+        ],
+        "@private": [
+          {
+            "name": "@private",
+            "body": ""
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "body": "{String}",
+            "type": "String",
+            "description": ""
+          }
+        ]
+      },
+      "type": "function",
+      "access": "protected"
+    },
+    "_generateUtilityFunctionsCode": {
+      "location": {
+        "start": {
+          "line": 514,
+          "column": 4
+        },
+        "end": {
+          "line": 526,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Returns the code of utility functions needed for the command implementations."
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "body": "script {String} Optional script code to be searched for the function name.\nIf given, omit function if not present in the script code",
+            "paramName": "script",
+            "description": " Optional script code to be searched for the function name.\nIf given, omit function if not present in the script code",
+            "type": "String"
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "body": "{string[]}",
+            "type": "string[]",
+            "description": ""
+          }
+        ],
+        "@private": [
+          {
+            "name": "@private",
+            "body": ""
+          }
+        ]
+      },
+      "type": "function",
+      "access": "protected"
+    },
+    "_play": {
+      "location": {
+        "start": {
+          "line": 536,
+          "column": 4
+        },
+        "end": {
+          "line": 593,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Replays a number of script lines"
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "body": "lines {String[]}"
+          },
+          {
+            "name": "@param",
+            "body": "steps {Integer?}"
+          },
+          {
+            "name": "@param",
+            "body": "step {Integer?}"
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "body": "{Promise<boolean>}",
+            "type": "Promise<boolean>",
+            "description": ""
+          }
+        ],
+        "@private": [
+          {
+            "name": "@private",
+            "body": ""
+          }
+        ]
+      },
+      "type": "function",
+      "access": "protected"
+    },
+    "replay": {
+      "location": {
+        "start": {
+          "line": 602,
+          "column": 4
+        },
+        "end": {
+          "line": 634,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Replays the given script of intermediate code"
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "body": "script {String} The script to replay",
+            "paramName": "script",
+            "description": " The script to replay",
+            "type": "String"
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "body": "{Promise} Promise which resolves when the script has been replayed, or\nrejects with an error",
+            "type": "Promise",
+            "description": " Promise which resolves when the script has been replayed, or\nrejects with an error"
+          }
+        ],
+        "@todo": [
+          {
+            "name": "@todo",
+            "body": "implement pausing"
+          }
+        ]
+      },
+      "type": "function",
+      "access": "public"
+    },
+    "translate": {
+      "location": {
+        "start": {
+          "line": 641,
+          "column": 4
+        },
+        "end": {
+          "line": 643,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Translates the intermediate code into the target language"
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "body": "script",
+            "paramName": "script",
+            "type": ""
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "body": "{string} executable code",
+            "type": "string",
+            "description": " executable code"
+          }
+        ]
+      },
+      "type": "function",
+      "access": "public"
+    },
+    "_translate": {
+      "location": {
+        "start": {
+          "line": 651,
+          "column": 4
+        },
+        "end": {
+          "line": 667,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Implementation for #translate()"
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "body": "script",
+            "paramName": "script",
+            "type": ""
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "body": "{string}",
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "@private": [
+          {
+            "name": "@private",
+            "body": ""
+          }
+        ]
+      },
+      "type": "function",
+      "access": "protected"
+    },
+    "generateWaitForConditionCode": {
+      "location": {
+        "start": {
+          "line": 676,
+          "column": 4
+        },
+        "end": {
+          "line": 680,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Given an async piece of code which checks for a condition or an application state,\nreturn code that checks for this condition, throwing an error if the\ncondition hasn't been fulfilled within the set timeout."
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "body": "condition {String} The condition expression as a string",
+            "paramName": "condition",
+            "description": " The condition expression as a string",
+            "type": "String"
+          },
+          {
+            "name": "@param",
+            "body": "timeoutmsg {String|undefined} An optional message to be shown if the condition hasn't been met before the timeout.",
+            "paramName": "timeoutmsg",
+            "description": " An optional message to be shown if the condition hasn't been met before the timeout.",
+            "type": [
+              "String",
+              "undefined"
+            ]
+          }
+        ]
+      },
+      "type": "function",
+      "access": "public"
+    },
+    "generateWaitForEventCode": {
+      "location": {
+        "start": {
+          "line": 692,
+          "column": 4
+        },
+        "end": {
+          "line": 705,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Generates code that returns a promise which will resolve (with any potential event data) if the given object fires\nan event with the given type and data (if applicable) and will reject if the timeout is reached before that happens."
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "body": "id {String} The id of the object to monitor",
+            "paramName": "id",
+            "description": " The id of the object to monitor",
+            "type": "String"
+          },
+          {
+            "name": "@param",
+            "body": "type {String} The type of the event to wait for",
+            "paramName": "type",
+            "description": " The type of the event to wait for",
+            "type": "String"
+          },
+          {
+            "name": "@param",
+            "body": "data {*|undefined} The data to expect. Must be serializable to JSON. Exception: if the data is a string that\nstarts with \"{verbatim}\", the unquoted string is used",
+            "paramName": "data",
+            "description": " The data to expect. Must be serializable to JSON. Exception: if the data is a string that\nstarts with \"{verbatim}\", the unquoted string is used",
+            "type": [
+              "*",
+              "undefined"
+            ]
+          },
+          {
+            "name": "@param",
+            "body": "timeoutmsg {String|undefined} An optional message to be shown if the event hasn't been fired before the timeout.",
+            "paramName": "timeoutmsg",
+            "description": " An optional message to be shown if the event hasn't been fired before the timeout.",
+            "type": [
+              "String",
+              "undefined"
+            ]
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "body": "{String}",
+            "type": "String",
+            "description": ""
+          }
+        ]
+      },
+      "type": "function",
+      "access": "public"
+    },
+    "generateWaitForEventTimoutFunction": {
+      "location": {
+        "start": {
+          "line": 721,
+          "column": 4
+        },
+        "end": {
+          "line": 735,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Generates code that returns a promise which will resolve (with any\npotential event data) if the given object fires an event with the given\ntype and data (if applicable). After the timeout, it will execute the\ngiven code and restart the timeout."
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "body": "id {String} The id of the object to monitor",
+            "paramName": "id",
+            "description": " The id of the object to monitor",
+            "type": "String"
+          },
+          {
+            "name": "@param",
+            "body": "type {String} The type of the event to wait for",
+            "paramName": "type",
+            "description": " The type of the event to wait for",
+            "type": "String"
+          },
+          {
+            "name": "@param",
+            "body": "data {*|null} The data to expect. Must be serializable to JSON. In case\nof events that do not have data, you MUST explicitly pass 'undefined' as\nargument if you use the following arguments",
+            "paramName": "data",
+            "description": " The data to expect. Must be serializable to JSON. In case\nof events that do not have data, you MUST explicitly pass 'undefined' as\nargument if you use the following arguments",
+            "type": [
+              "*",
+              "null"
+            ]
+          },
+          {
+            "name": "@param",
+            "body": "code {String} The code to execute after the timeout",
+            "paramName": "code",
+            "description": " The code to execute after the timeout",
+            "type": "String"
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "body": "{String}",
+            "type": "String",
+            "description": ""
+          }
+        ]
+      },
+      "type": "function",
+      "access": "public"
+    },
+    "addComment": {
+      "location": {
+        "start": {
+          "line": 742,
+          "column": 4
+        },
+        "end": {
+          "line": 744,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Adds a line comment to the target script"
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "body": "comment {String}"
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "body": "{string}",
+            "type": "string",
+            "description": ""
+          }
+        ]
+      },
+      "type": "function",
+      "access": "public"
+    },
+    "escapeRegexpChars": {
+      "location": {
+        "start": {
+          "line": 751,
+          "column": 4
+        },
+        "end": {
+          "line": 753,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Escapes all characters in a string that are special characters in a regular expression"
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "body": "s {String} The string to escape",
+            "paramName": "s",
+            "description": " The string to escape",
+            "type": "String"
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "body": "{String}",
+            "type": "String",
+            "description": ""
+          }
+        ]
+      },
+      "type": "function",
+      "access": "public"
+    },
+    "createRegexpForJsonComparison": {
+      "location": {
+        "start": {
+          "line": 761,
+          "column": 4
+        },
+        "end": {
+          "line": 772,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Creates a regular expression that matches a json string. In this string, you can use a regular expression\nenclosed by \"<!\" and \"!>\" to replace data that cannot be known in advance, such as tokens or session ids.\nExample: '{token:\"<![A-Za-z0-9]{32}!>\",user:\"admin\">' will match '{\"token\":\"OnBHqQd59VHZYcphVADPhX74q0Sc6ERR\",\"user\":\"admin\"}'"
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "body": "s {string}"
+          }
+        ]
+      },
+      "type": "function",
+      "access": "public"
+    },
+    "_addPromiseToAwaitStack": {
+      "location": {
+        "start": {
+          "line": 779,
+          "column": 4
+        },
+        "end": {
+          "line": 784,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Adds promise code to a list of promises that need to resolve before the\nscript proceeds"
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "body": "promiseCode",
+            "paramName": "promiseCode",
+            "type": ""
+          }
+        ]
+      },
+      "type": "function",
+      "access": "protected"
+    },
+    "getExportFileExtension": {
+      "location": {
+        "start": {
+          "line": 790,
+          "column": 4
+        },
+        "end": {
+          "line": 792,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Returns the file extension of the downloaded file in the target language"
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "body": "{string}",
+            "type": "string",
+            "description": ""
+          }
+        ]
+      },
+      "type": "function",
+      "access": "public"
+    },
+    "isInAwaitBlock": {
+      "location": {
+        "start": {
+          "line": 798,
+          "column": 4
+        },
+        "end": {
+          "line": 800,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Whether the player is in an await block"
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "body": "{Boolean}",
+            "type": "Boolean",
+            "description": ""
+          }
+        ]
+      },
+      "type": "function",
+      "access": "public"
+    },
+    "cmd_assert_uri": {
+      "location": {
+        "start": {
+          "line": 812,
+          "column": 4
+        },
+        "end": {
+          "line": 814,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "============================================================================\nCOMMANDS\n============================================================================"
+          },
+          {
+            "name": "@description",
+            "body": "Asserts that the current url matches the given value (RegExp)"
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "body": "uri {String}"
+          }
+        ]
+      },
+      "type": "function",
+      "access": "public"
+    },
+    "cmd_assert_match_uri": {
+      "location": {
+        "start": {
+          "line": 820,
+          "column": 4
+        },
+        "end": {
+          "line": 825,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Asserts that the current url matches the given value (RegExp)"
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "body": "uri_regexp {String} A string containing a regular expression",
+            "paramName": "uri_regexp",
+            "description": " A string containing a regular expression",
+            "type": "String"
+          }
+        ]
+      },
+      "type": "function",
+      "access": "public"
+    },
+    "cmd_config_set_mode": {
+      "location": {
+        "start": {
+          "line": 832,
+          "column": 4
+        },
+        "end": {
+          "line": 834,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Sets the player mode"
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "body": "mode",
+            "paramName": "mode",
+            "type": ""
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "body": "{string}",
+            "type": "string",
+            "description": ""
+          }
+        ]
+      },
+      "type": "function",
+      "access": "public"
+    },
+    "cmd_define": {
+      "location": {
+        "start": {
+          "line": 841,
+          "column": 4
+        },
+        "end": {
+          "line": 849,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Starts the definition of a macro"
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "body": "macro_name",
+            "paramName": "macro_name",
+            "type": ""
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "body": "{null}",
+            "type": "null",
+            "description": ""
+          }
+        ]
+      },
+      "type": "function",
+      "access": "public"
+    },
+    "cmd_end": {
+      "location": {
+        "start": {
+          "line": 855,
+          "column": 4
+        },
+        "end": {
+          "line": 866,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Ends the definition of a macro or a block of awaitable statements"
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "body": "{null}",
+            "type": "null",
+            "description": ""
+          }
+        ]
+      },
+      "type": "function",
+      "access": "public"
+    },
+    "cmd_await_all": {
+      "location": {
+        "start": {
+          "line": 872,
+          "column": 4
+        },
+        "end": {
+          "line": 875,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Starts a block of statements that return promises. The player will wait for\nall of the promises to resolve before proceeding."
+          }
+        ]
+      },
+      "type": "function",
+      "access": "public"
+    },
+    "addGlobalEventListener": {
+      "type": "function",
+      "name": "addGlobalEventListener",
+      "abstract": false,
+      "mixin": true,
+      "inherited": true,
+      "access": "public",
+      "overriddenFrom": "cboulanger.eventrecorder.MHelperMethods",
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Add a function to the global event monitor."
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "body": "fn {Function}"
+          }
+        ]
+      }
+    },
+    "absoluteIdOf": {
+      "type": "function",
+      "name": "absoluteIdOf",
+      "abstract": false,
+      "mixin": true,
+      "inherited": true,
+      "access": "public",
+      "overriddenFrom": "cboulanger.eventrecorder.MHelperMethods",
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Returns the absolute id of the owned object with that id"
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "body": "domNode {Element}"
+          },
+          {
+            "name": "@param",
+            "body": "id {String}"
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "body": "{String}",
+            "type": "String",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "getQxOwner": {
+      "type": "function",
+      "name": "getQxOwner",
+      "abstract": false,
+      "mixin": false,
+      "inherited": true,
+      "access": "public",
+      "overriddenFrom": "qx.core.Object",
+      "property": "get",
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Gets the (computed) value of the property <code>qxOwner</code>.\n\nFor further details take a look at the property definition: {@link #qxOwner}."
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "type": "qx.core.Object",
+            "desc": "Returns the value for qxOwner"
+          }
+        ]
+      }
+    },
+    "setQxOwner": {
+      "type": "function",
+      "name": "setQxOwner",
+      "abstract": false,
+      "mixin": false,
+      "inherited": true,
+      "access": "public",
+      "overriddenFrom": "qx.core.Object",
+      "property": "set",
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Sets the user value of the property <code>qxOwner</code>.\n\nFor further details take a look at the property definition: {@link #qxOwner}."
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "type": "qx.core.Object",
+            "paramName": "value",
+            "desc": "Value for qxOwner"
+          }
+        ]
+      }
+    },
+    "resetQxOwner": {
+      "type": "function",
+      "name": "resetQxOwner",
+      "abstract": false,
+      "mixin": false,
+      "inherited": true,
+      "access": "public",
+      "overriddenFrom": "qx.core.Object",
+      "property": "reset"
+    },
+    "getQxObjectId": {
+      "type": "function",
+      "name": "getQxObjectId",
+      "abstract": false,
+      "mixin": false,
+      "inherited": true,
+      "access": "public",
+      "overriddenFrom": "qx.core.Object",
+      "property": "get",
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Gets the (computed) value of the property <code>qxObjectId</code>.\n\nFor further details take a look at the property definition: {@link #qxObjectId}."
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "desc": "Returns the value for qxObjectId"
+          }
+        ]
+      }
+    },
+    "setQxObjectId": {
+      "type": "function",
+      "name": "setQxObjectId",
+      "abstract": false,
+      "mixin": false,
+      "inherited": true,
+      "access": "public",
+      "overriddenFrom": "qx.core.Object",
+      "property": "set",
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Sets the user value of the property <code>qxObjectId</code>.\n\nFor further details take a look at the property definition: {@link #qxObjectId}."
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "paramName": "value",
+            "desc": "Value for qxObjectId"
+          }
+        ]
+      }
+    },
+    "resetQxObjectId": {
+      "type": "function",
+      "name": "resetQxObjectId",
+      "abstract": false,
+      "mixin": false,
+      "inherited": true,
+      "access": "public",
+      "overriddenFrom": "qx.core.Object",
+      "property": "reset"
+    },
+    "getMode": {
+      "type": "function",
+      "name": "getMode",
+      "abstract": false,
+      "mixin": false,
+      "inherited": false,
+      "access": "public",
+      "property": "get",
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Gets the (computed) value of the property <code>mode</code>.\n\nFor further details take a look at the property definition: {@link #mode}."
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "type": "any",
+            "desc": "Returns the value for mode"
+          }
+        ]
+      }
+    },
+    "setMode": {
+      "type": "function",
+      "name": "setMode",
+      "abstract": false,
+      "mixin": false,
+      "inherited": false,
+      "access": "public",
+      "property": "set",
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Sets the user value of the property <code>mode</code>.\n\nFor further details take a look at the property definition: {@link #mode}."
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "type": "any",
+            "paramName": "value",
+            "desc": "Value for mode"
+          }
+        ]
+      }
+    },
+    "resetMode": {
+      "type": "function",
+      "name": "resetMode",
+      "abstract": false,
+      "mixin": false,
+      "inherited": false,
+      "access": "public",
+      "property": "reset",
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Resets the user value of the property <code>mode</code>.\n\nThe computed value falls back to the next available value e.g. appearance, init or inheritance value depending on the property configuration and value availability.\n\nFor further details take a look at the property definition: {@link #mode}."
+          }
+        ]
+      }
+    },
+    "getTimeout": {
+      "type": "function",
+      "name": "getTimeout",
+      "abstract": false,
+      "mixin": false,
+      "inherited": false,
+      "access": "public",
+      "property": "get",
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Gets the (computed) value of the property <code>timeout</code>.\n\nFor further details take a look at the property definition: {@link #timeout}."
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "type": "Number",
+            "desc": "Returns the value for timeout"
+          }
+        ]
+      }
+    },
+    "setTimeout": {
+      "type": "function",
+      "name": "setTimeout",
+      "abstract": false,
+      "mixin": false,
+      "inherited": false,
+      "access": "public",
+      "property": "set",
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Sets the user value of the property <code>timeout</code>.\n\nFor further details take a look at the property definition: {@link #timeout}."
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "type": "Number",
+            "paramName": "value",
+            "desc": "Value for timeout"
+          }
+        ]
+      }
+    },
+    "resetTimeout": {
+      "type": "function",
+      "name": "resetTimeout",
+      "abstract": false,
+      "mixin": false,
+      "inherited": false,
+      "access": "public",
+      "property": "reset",
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Resets the user value of the property <code>timeout</code>.\n\nThe computed value falls back to the next available value e.g. appearance, init or inheritance value depending on the property configuration and value availability.\n\nFor further details take a look at the property definition: {@link #timeout}."
+          }
+        ]
+      }
+    },
+    "getInterval": {
+      "type": "function",
+      "name": "getInterval",
+      "abstract": false,
+      "mixin": false,
+      "inherited": false,
+      "access": "public",
+      "property": "get",
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Gets the (computed) value of the property <code>interval</code>.\n\nFor further details take a look at the property definition: {@link #interval}."
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "type": "Number",
+            "desc": "Returns the value for interval"
+          }
+        ]
+      }
+    },
+    "setInterval": {
+      "type": "function",
+      "name": "setInterval",
+      "abstract": false,
+      "mixin": false,
+      "inherited": false,
+      "access": "public",
+      "property": "set",
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Sets the user value of the property <code>interval</code>.\n\nFor further details take a look at the property definition: {@link #interval}."
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "type": "Number",
+            "paramName": "value",
+            "desc": "Value for interval"
+          }
+        ]
+      }
+    },
+    "resetInterval": {
+      "type": "function",
+      "name": "resetInterval",
+      "abstract": false,
+      "mixin": false,
+      "inherited": false,
+      "access": "public",
+      "property": "reset",
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Resets the user value of the property <code>interval</code>.\n\nThe computed value falls back to the next available value e.g. appearance, init or inheritance value depending on the property configuration and value availability.\n\nFor further details take a look at the property definition: {@link #interval}."
+          }
+        ]
+      }
+    },
+    "getUseDefaultDelay": {
+      "type": "function",
+      "name": "getUseDefaultDelay",
+      "abstract": false,
+      "mixin": false,
+      "inherited": false,
+      "access": "public",
+      "property": "get",
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Gets the (computed) value of the property <code>useDefaultDelay</code>.\n\nFor further details take a look at the property definition: {@link #useDefaultDelay}."
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "type": "Boolean",
+            "desc": "Returns the value for useDefaultDelay"
+          }
+        ]
+      }
+    },
+    "isUseDefaultDelay": {
+      "type": "function",
+      "name": "isUseDefaultDelay",
+      "abstract": false,
+      "mixin": false,
+      "inherited": false,
+      "access": "public",
+      "property": "is",
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Gets the (computed) value of the property <code>useDefaultDelay</code>.\n\nFor further details take a look at the property definition: {@link #useDefaultDelay}."
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "type": "Boolean",
+            "desc": "Returns the value for useDefaultDelay"
+          }
+        ]
+      }
+    },
+    "setUseDefaultDelay": {
+      "type": "function",
+      "name": "setUseDefaultDelay",
+      "abstract": false,
+      "mixin": false,
+      "inherited": false,
+      "access": "public",
+      "property": "set",
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Sets the user value of the property <code>useDefaultDelay</code>.\n\nFor further details take a look at the property definition: {@link #useDefaultDelay}."
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "type": "Boolean",
+            "paramName": "value",
+            "desc": "Value for useDefaultDelay"
+          }
+        ]
+      }
+    },
+    "resetUseDefaultDelay": {
+      "type": "function",
+      "name": "resetUseDefaultDelay",
+      "abstract": false,
+      "mixin": false,
+      "inherited": false,
+      "access": "public",
+      "property": "reset",
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Resets the user value of the property <code>useDefaultDelay</code>.\n\nThe computed value falls back to the next available value e.g. appearance, init or inheritance value depending on the property configuration and value availability.\n\nFor further details take a look at the property definition: {@link #useDefaultDelay}."
+          }
+        ]
+      }
+    },
+    "getMaxDelay": {
+      "type": "function",
+      "name": "getMaxDelay",
+      "abstract": false,
+      "mixin": false,
+      "inherited": false,
+      "access": "public",
+      "property": "get",
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Gets the (computed) value of the property <code>maxDelay</code>.\n\nFor further details take a look at the property definition: {@link #maxDelay}."
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "type": "Number",
+            "desc": "Returns the value for maxDelay"
+          }
+        ]
+      }
+    },
+    "setMaxDelay": {
+      "type": "function",
+      "name": "setMaxDelay",
+      "abstract": false,
+      "mixin": false,
+      "inherited": false,
+      "access": "public",
+      "property": "set",
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Sets the user value of the property <code>maxDelay</code>.\n\nFor further details take a look at the property definition: {@link #maxDelay}."
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "type": "Number",
+            "paramName": "value",
+            "desc": "Value for maxDelay"
+          }
+        ]
+      }
+    },
+    "resetMaxDelay": {
+      "type": "function",
+      "name": "resetMaxDelay",
+      "abstract": false,
+      "mixin": false,
+      "inherited": false,
+      "access": "public",
+      "property": "reset",
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Resets the user value of the property <code>maxDelay</code>.\n\nThe computed value falls back to the next available value e.g. appearance, init or inheritance value depending on the property configuration and value availability.\n\nFor further details take a look at the property definition: {@link #maxDelay}."
+          }
+        ]
+      }
+    },
+    "getCanReplayInBrowser": {
+      "type": "function",
+      "name": "getCanReplayInBrowser",
+      "abstract": false,
+      "mixin": false,
+      "inherited": false,
+      "access": "public",
+      "property": "get",
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Gets the (computed) value of the property <code>canReplayInBrowser</code>.\n\nFor further details take a look at the property definition: {@link #canReplayInBrowser}."
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "type": "Boolean",
+            "desc": "Returns the value for canReplayInBrowser"
+          }
+        ]
+      }
+    },
+    "isCanReplayInBrowser": {
+      "type": "function",
+      "name": "isCanReplayInBrowser",
+      "abstract": false,
+      "mixin": false,
+      "inherited": false,
+      "access": "public",
+      "property": "is",
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Gets the (computed) value of the property <code>canReplayInBrowser</code>.\n\nFor further details take a look at the property definition: {@link #canReplayInBrowser}."
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "type": "Boolean",
+            "desc": "Returns the value for canReplayInBrowser"
+          }
+        ]
+      }
+    },
+    "setCanReplayInBrowser": {
+      "type": "function",
+      "name": "setCanReplayInBrowser",
+      "abstract": false,
+      "mixin": false,
+      "inherited": false,
+      "access": "public",
+      "property": "set",
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Sets the user value of the property <code>canReplayInBrowser</code>.\n\nFor further details take a look at the property definition: {@link #canReplayInBrowser}."
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "type": "Boolean",
+            "paramName": "value",
+            "desc": "Value for canReplayInBrowser"
+          }
+        ]
+      }
+    },
+    "resetCanReplayInBrowser": {
+      "type": "function",
+      "name": "resetCanReplayInBrowser",
+      "abstract": false,
+      "mixin": false,
+      "inherited": false,
+      "access": "public",
+      "property": "reset",
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Resets the user value of the property <code>canReplayInBrowser</code>.\n\nThe computed value falls back to the next available value e.g. appearance, init or inheritance value depending on the property configuration and value availability.\n\nFor further details take a look at the property definition: {@link #canReplayInBrowser}."
+          }
+        ]
+      }
+    },
+    "getCanExportExecutableCode": {
+      "type": "function",
+      "name": "getCanExportExecutableCode",
+      "abstract": false,
+      "mixin": false,
+      "inherited": false,
+      "access": "public",
+      "property": "get",
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Gets the (computed) value of the property <code>canExportExecutableCode</code>.\n\nFor further details take a look at the property definition: {@link #canExportExecutableCode}."
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "type": "Boolean",
+            "desc": "Returns the value for canExportExecutableCode"
+          }
+        ]
+      }
+    },
+    "isCanExportExecutableCode": {
+      "type": "function",
+      "name": "isCanExportExecutableCode",
+      "abstract": false,
+      "mixin": false,
+      "inherited": false,
+      "access": "public",
+      "property": "is",
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Gets the (computed) value of the property <code>canExportExecutableCode</code>.\n\nFor further details take a look at the property definition: {@link #canExportExecutableCode}."
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "type": "Boolean",
+            "desc": "Returns the value for canExportExecutableCode"
+          }
+        ]
+      }
+    },
+    "setCanExportExecutableCode": {
+      "type": "function",
+      "name": "setCanExportExecutableCode",
+      "abstract": false,
+      "mixin": false,
+      "inherited": false,
+      "access": "public",
+      "property": "set",
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Sets the user value of the property <code>canExportExecutableCode</code>.\n\nFor further details take a look at the property definition: {@link #canExportExecutableCode}."
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "type": "Boolean",
+            "paramName": "value",
+            "desc": "Value for canExportExecutableCode"
+          }
+        ]
+      }
+    },
+    "resetCanExportExecutableCode": {
+      "type": "function",
+      "name": "resetCanExportExecutableCode",
+      "abstract": false,
+      "mixin": false,
+      "inherited": false,
+      "access": "public",
+      "property": "reset",
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Resets the user value of the property <code>canExportExecutableCode</code>.\n\nThe computed value falls back to the next available value e.g. appearance, init or inheritance value depending on the property configuration and value availability.\n\nFor further details take a look at the property definition: {@link #canExportExecutableCode}."
+          }
+        ]
+      }
+    }
+  },
+  "descendants": [
+    "cboulanger.eventrecorder.player.Qooxdoo"
+  ]
+}

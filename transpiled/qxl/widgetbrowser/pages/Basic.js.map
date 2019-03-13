@@ -1,0 +1,48 @@
+{
+  "version": 3,
+  "sources": [
+    "/home/travis/build/cboulanger/eventrecorder/contrib/qooxdoo_qxl.widgetbrowser_v0.1.6/source/class/qxl/widgetbrowser/pages/Basic.js"
+  ],
+  "names": [
+    "qx",
+    "Bootstrap",
+    "executePendingDefers",
+    "$$dbClassInfo",
+    "Class",
+    "define",
+    "extend",
+    "qxl",
+    "widgetbrowser",
+    "pages",
+    "AbstractPage",
+    "construct",
+    "hbox",
+    "__hbox",
+    "ui",
+    "container",
+    "Composite",
+    "layout",
+    "HBox",
+    "add",
+    "top",
+    "initWidgets",
+    "members",
+    "widgets",
+    "_widgets",
+    "label",
+    "basic",
+    "Label",
+    "set",
+    "alignY",
+    "push",
+    "image",
+    "Atom",
+    "atom",
+    "Basic"
+  ],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;AAAAA,KAAGC,SAAH,CAAaC,oBAAb,CAAkCC,aAAlC,EAgCAH,GAAGI,KAAH,CAASC,MAAT,CAAgB,+BAAhB,EACA;AACEC,YAAQC,IAAIC,aAAJ,CAAkBC,KAAlB,CAAwBC,YADlC;;AAGEC,eAAW,qBACX;AACE;;AAEA,UAAIC,OAAO,KAAKC,MAAL,GAAc,IAAIb,GAAGc,EAAH,CAAMC,SAAN,CAAgBC,SAApB,CAA8B,IAAIhB,GAAGc,EAAH,CAAMG,MAAN,CAAaC,IAAjB,CAAsB,EAAtB,CAA9B,CAAzB;AACA,WAAKC,GAAL,CAASP,IAAT,EAAe,EAACQ,KAAK,CAAN,EAAf;;AAEA,WAAKC,WAAL;AACD,KAXH;;AAaEC,aACA;;AAEET,cAAQ,IAFV;;AAIEQ,mBAAa,uBACb;AACE,YAAIE,UAAU,KAAKC,QAAnB;;AAEA;AACA,YAAIC,QAAQ,IAAIzB,GAAGc,EAAH,CAAMY,KAAN,CAAYC,KAAhB,CAAsB,OAAtB,EAA+BC,GAA/B,CAAmC,EAACC,QAAQ,QAAT,EAAnC,CAAZ;AACAN,gBAAQO,IAAR,CAAaL,KAAb;AACA,aAAKZ,MAAL,CAAYM,GAAZ,CAAgBM,KAAhB;;AAEA;AACA,YAAIM,QAAQ,IAAI/B,GAAGc,EAAH,CAAMY,KAAN,CAAYM,IAAhB,CAAqB,OAArB,EAA8B,uCAA9B,CAAZ;AACAT,gBAAQO,IAAR,CAAaC,KAAb;AACA,aAAKlB,MAAL,CAAYM,GAAZ,CAAgBY,KAAhB;;AAEA;AACA,YAAIE,OAAO,IAAIjC,GAAGc,EAAH,CAAMY,KAAN,CAAYM,IAAhB,CAAqB,MAArB,EAA6B,uCAA7B,CAAX;AACAT,gBAAQO,IAAR,CAAaG,IAAb;AACA,aAAKpB,MAAL,CAAYM,GAAZ,CAAgBc,IAAhB;AACD;AAtBH;AAdF,GADA,C;AAhCA1B,MAAIC,aAAJ,CAAkBC,KAAlB,CAAwByB,KAAxB,CAA8B/B,aAA9B,GAA8CA,aAA9C",
+  "file": "Basic.js",
+  "sourcesContent": [
+    "/* ************************************************************************\n\n   qooxdoo - the new era of web development\n\n   http://qooxdoo.org\n\n   Copyright:\n     2004-2010 1&1 Internet AG, Germany, http://www.1und1.de\n\n   License:\n     MIT: https://opensource.org/licenses/MIT\n     See the LICENSE file in the project's top-level directory for details.\n\n   Authors:\n     * Tristan Koch (tristankoch)\n\n************************************************************************ */\n\n/* ************************************************************************\n\n\n************************************************************************ */\n\n/**\n * Demonstrates qx.ui.basic(...):\n *\n * Label, Image, Atom\n *\n * @asset(qx/icon/${qx.icontheme}/32/status/dialog-information.png)\n *\n */\n\nqx.Class.define(\"qxl.widgetbrowser.pages.Basic\",\n{\n  extend: qxl.widgetbrowser.pages.AbstractPage,\n\n  construct: function()\n  {\n    this.base(arguments);\n\n    var hbox = this.__hbox = new qx.ui.container.Composite(new qx.ui.layout.HBox(10));\n    this.add(hbox, {top: 0});\n\n    this.initWidgets();\n  },\n\n  members :\n  {\n\n    __hbox: null,\n\n    initWidgets: function()\n    {\n      var widgets = this._widgets;\n\n      // Label\n      var label = new qx.ui.basic.Label(\"Label\").set({alignY: \"middle\"});\n      widgets.push(label);\n      this.__hbox.add(label);\n\n      // Image\n      var image = new qx.ui.basic.Atom(\"Image\", \"icon/32/status/dialog-information.png\");\n      widgets.push(image);\n      this.__hbox.add(image);\n\n      // Atom\n      var atom = new qx.ui.basic.Atom(\"Atom\", \"icon/32/status/dialog-information.png\");\n      widgets.push(atom);\n      this.__hbox.add(atom);\n    }\n  }\n});\n"
+  ]
+}

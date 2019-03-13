@@ -1,0 +1,42 @@
+{
+  "version": 3,
+  "sources": [
+    "/home/travis/build/cboulanger/eventrecorder/contrib/ergobyte_qookery_v0.7.0-pre/qookery/source/class/qookery/internal/components/HoverButtonComponent.js"
+  ],
+  "names": [
+    "qx",
+    "Bootstrap",
+    "executePendingDefers",
+    "$$dbClassInfo",
+    "Class",
+    "define",
+    "extend",
+    "qookery",
+    "internal",
+    "components",
+    "AtomComponent",
+    "construct",
+    "parentComponent",
+    "members",
+    "getAttributeType",
+    "attributeName",
+    "_createAtomWidget",
+    "button",
+    "ui",
+    "form",
+    "HoverButton",
+    "_applyAttribute",
+    "_applyAtomAttributes",
+    "getCommand",
+    "getMainWidget",
+    "setCommand",
+    "command",
+    "execute",
+    "HoverButtonComponent"
+  ],
+  "mappings": ";;;;;;;;;;;;;;AAAAA,IAAGC,SAAH,CAAaC,oBAAb,CAAkCC,aAAlC,EAkBAH,GAAGI,KAAH,CAASC,MAAT,CAAgB,kDAAhB,EAAoE;;AAEnEC,UAAQC,QAAQC,QAAR,CAAiBC,UAAjB,CAA4BC,aAF+B;;AAInEC,aAAW,mBAASC,eAAT,EAA0B;AACpC,oEAAqBA,eAArB;AACA,GANkE;;AAQnEC,WAAS;;AAER;;AAEAC,qBAAkB,0BAASC,aAAT,EAAwB;AACzC,YAAOA,aAAP;AACA,UAAK,UAAL;AAAiB,aAAO,SAAP;AADjB;AAGA,uGAA4BA,aAA5B;AACA,IATO;;AAWR;;AAEAC,sBAAmB,6BAAW;AAC7B,QAAIC,SAAS,IAAIjB,GAAGkB,EAAH,CAAMC,IAAN,CAAWC,WAAf,EAAb;AACA,SAAKC,eAAL,CAAqB,UAArB,EAAiCJ,MAAjC,EAAyC,UAAzC;AACA,SAAKK,oBAAL,CAA0BL,MAA1B;AACA,WAAOA,MAAP;AACA,IAlBO;;AAoBR;;AAEAM,eAAY,sBAAW;AACtB,WAAO,KAAKC,aAAL,GAAqBD,UAArB,EAAP;AACA,IAxBO;;AA0BRE,eAAY,oBAASC,OAAT,EAAkB;AAC7B,SAAKF,aAAL,GAAqBC,UAArB,CAAgCC,OAAhC;AACA,IA5BO;;AA8BRC,YAAS,mBAAW;AACnB,SAAKH,aAAL,GAAqBG,OAArB;AACA;AAhCO;AAR0D,EAApE,C;AAlBApB,SAAQC,QAAR,CAAiBC,UAAjB,CAA4BmB,oBAA5B,CAAiDzB,aAAjD,GAAiEA,aAAjE",
+  "file": "HoverButtonComponent.js",
+  "sourcesContent": [
+    "/*\n\tQookery - Declarative UI Building for Qooxdoo\n\n\tCopyright (c) Ergobyte Informatics S.A., www.ergobyte.gr\n\n\tLicensed under the Apache License, Version 2.0 (the \"License\");\n\tyou may not use this file except in compliance with the License.\n\tYou may obtain a copy of the License at\n\n\t\thttp://www.apache.org/licenses/LICENSE-2.0\n\n\tUnless required by applicable law or agreed to in writing, software\n\tdistributed under the License is distributed on an \"AS IS\" BASIS,\n\tWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n\tSee the License for the specific language governing permissions and\n\tlimitations under the License.\n*/\n\nqx.Class.define(\"qookery.internal.components.HoverButtonComponent\", {\n\n\textend: qookery.internal.components.AtomComponent,\n\n\tconstruct: function(parentComponent) {\n\t\tthis.base(arguments, parentComponent);\n\t},\n\n\tmembers: {\n\n\t\t// Metadata\n\n\t\tgetAttributeType: function(attributeName) {\n\t\t\tswitch(attributeName) {\n\t\t\tcase \"interval\": return \"Integer\";\n\t\t\t}\n\t\t\treturn this.base(arguments, attributeName);\n\t\t},\n\n\t\t// Construction\n\n\t\t_createAtomWidget: function() {\n\t\t\tvar button = new qx.ui.form.HoverButton();\n\t\t\tthis._applyAttribute(\"interval\", button, \"interval\");\n\t\t\tthis._applyAtomAttributes(button);\n\t\t\treturn button;\n\t\t},\n\n\t\t// Public methods\n\n\t\tgetCommand: function() {\n\t\t\treturn this.getMainWidget().getCommand();\n\t\t},\n\n\t\tsetCommand: function(command) {\n\t\t\tthis.getMainWidget().setCommand(command);\n\t\t},\n\n\t\texecute: function() {\n\t\t\tthis.getMainWidget().execute();\n\t\t}\n\t}\n});\n"
+  ]
+}

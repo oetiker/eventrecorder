@@ -1,0 +1,46 @@
+{
+  "version": 3,
+  "sources": [
+    "/home/travis/build/cboulanger/eventrecorder/contrib/ergobyte_qookery_v0.7.0-pre/qookery/source/class/qookery/internal/components/TabViewComponent.js"
+  ],
+  "names": [
+    "qx",
+    "Bootstrap",
+    "executePendingDefers",
+    "$$dbClassInfo",
+    "Class",
+    "define",
+    "extend",
+    "qookery",
+    "internal",
+    "components",
+    "ContainerComponent",
+    "construct",
+    "parentComponent",
+    "members",
+    "getAttributeType",
+    "attributeName",
+    "_createContainerWidget",
+    "tabView",
+    "ui",
+    "tabview",
+    "TabView",
+    "_applyAttribute",
+    "_applyWidgetAttributes",
+    "getAttribute",
+    "defaultValue",
+    "getSelection",
+    "selection",
+    "getMainWidget",
+    "length",
+    "getUserData",
+    "setSelection",
+    "page",
+    "TabViewComponent"
+  ],
+  "mappings": ";;;;;;;;;;;;;;AAAAA,IAAGC,SAAH,CAAaC,oBAAb,CAAkCC,aAAlC,EAkBAH,GAAGI,KAAH,CAASC,MAAT,CAAgB,8CAAhB,EAAgE;;AAE/DC,UAAQC,QAAQC,QAAR,CAAiBC,UAAjB,CAA4BC,kBAF2B;;AAI/DC,aAAW,mBAASC,eAAT,EAA0B;AACpC,yEAAqBA,eAArB;AACA,GAN8D;;AAQ/DC,WAAS;;AAER;;AAEAC,qBAAkB,0BAASC,aAAT,EAAwB;AACzC,YAAOA,aAAP;AACA,UAAK,cAAL;AAAqB,aAAO,QAAP;AACrB,UAAK,iBAAL;AAAwB,aAAO,aAAP;AACxB,UAAK,wBAAL;AAA+B,aAAO,SAAP;AAC/B,UAAK,sBAAL;AAA6B,aAAO,SAAP;AAC7B,UAAK,uBAAL;AAA8B,aAAO,SAAP;AAC9B,UAAK,qBAAL;AAA4B,aAAO,SAAP;AAC5B;AAAS,qGAA4BA,aAA5B;AAPT;AASA,IAdO;;AAgBR;;AAEAC,2BAAwB,kCAAW;AAClC,QAAIC,UAAU,IAAIjB,GAAGkB,EAAH,CAAMC,OAAN,CAAcC,OAAlB,EAAd;AACA,SAAKC,eAAL,CAAqB,cAArB,EAAqCJ,OAArC,EAA8C,aAA9C;AACA,SAAKI,eAAL,CAAqB,iBAArB,EAAwCJ,OAAxC,EAAiD,gBAAjD;AACA,SAAKI,eAAL,CAAqB,qBAArB,EAA4CJ,OAA5C,EAAqD,mBAArD;AACA,SAAKI,eAAL,CAAqB,uBAArB,EAA8CJ,OAA9C,EAAuD,qBAAvD;AACA,SAAKI,eAAL,CAAqB,wBAArB,EAA+CJ,OAA/C,EAAwD,sBAAxD;AACA,SAAKI,eAAL,CAAqB,sBAArB,EAA6CJ,OAA7C,EAAsD,oBAAtD;AACA,SAAKK,sBAAL,CAA4BL,OAA5B;AACA,WAAOA,OAAP;AACA,IA5BO;;AA8BRM,iBAAc,sBAASR,aAAT,EAAwBS,YAAxB,EAAsC;AACnD,QAAGT,kBAAkB,QAArB,EAA+B,OAAO,MAAP;AAC/B,+FAA4BA,aAA5B,EAA2CS,YAA3C;AACA,IAjCO;;AAmCRC,iBAAc,wBAAW;AACxB,QAAIC,YAAY,KAAKC,aAAL,GAAqBF,YAArB,EAAhB;AACA,QAAG,CAACC,SAAD,IAAcA,UAAUE,MAAV,KAAqB,CAAtC,EAAyC,OAAO,IAAP;AACzC,WAAOF,UAAU,CAAV,EAAaG,WAAb,CAAyB,kBAAzB,CAAP;AACA,IAvCO;;AAyCRC,iBAAc,sBAASC,IAAT,EAAe;AAC5B,SAAKJ,aAAL,GAAqBG,YAArB,CAAkCC,OAAO,CAAEA,KAAKJ,aAAL,EAAF,CAAP,GAAkC,EAApE;AACA;AA3CO;AARsD,EAAhE,C;AAlBApB,SAAQC,QAAR,CAAiBC,UAAjB,CAA4BuB,gBAA5B,CAA6C7B,aAA7C,GAA6DA,aAA7D",
+  "file": "TabViewComponent.js",
+  "sourcesContent": [
+    "/*\n\tQookery - Declarative UI Building for Qooxdoo\n\n\tCopyright (c) Ergobyte Informatics S.A., www.ergobyte.gr\n\n\tLicensed under the Apache License, Version 2.0 (the \"License\");\n\tyou may not use this file except in compliance with the License.\n\tYou may obtain a copy of the License at\n\n\t\thttp://www.apache.org/licenses/LICENSE-2.0\n\n\tUnless required by applicable law or agreed to in writing, software\n\tdistributed under the License is distributed on an \"AS IS\" BASIS,\n\tWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n\tSee the License for the specific language governing permissions and\n\tlimitations under the License.\n*/\n\nqx.Class.define(\"qookery.internal.components.TabViewComponent\", {\n\n\textend: qookery.internal.components.ContainerComponent,\n\n\tconstruct: function(parentComponent) {\n\t\tthis.base(arguments, parentComponent);\n\t},\n\n\tmembers: {\n\n\t\t// Metadata\n\n\t\tgetAttributeType: function(attributeName) {\n\t\t\tswitch(attributeName) {\n\t\t\tcase \"bar-position\": return \"String\";\n\t\t\tcase \"content-padding\": return \"IntegerList\";\n\t\t\tcase \"content-padding-bottom\": return \"Integer\";\n\t\t\tcase \"content-padding-left\": return \"Integer\";\n\t\t\tcase \"content-padding-right\": return \"Integer\";\n\t\t\tcase \"content-padding-top\": return \"Integer\";\n\t\t\tdefault: return this.base(arguments, attributeName);\n\t\t\t}\n\t\t},\n\n\t\t// Construction\n\n\t\t_createContainerWidget: function() {\n\t\t\tvar tabView = new qx.ui.tabview.TabView();\n\t\t\tthis._applyAttribute(\"bar-position\", tabView, \"barPosition\");\n\t\t\tthis._applyAttribute(\"content-padding\", tabView, \"contentPadding\");\n\t\t\tthis._applyAttribute(\"content-padding-top\", tabView, \"contentPaddingTop\");\n\t\t\tthis._applyAttribute(\"content-padding-right\", tabView, \"contentPaddingRight\");\n\t\t\tthis._applyAttribute(\"content-padding-bottom\", tabView, \"contentPaddingBottom\");\n\t\t\tthis._applyAttribute(\"content-padding-left\", tabView, \"contentPaddingLeft\");\n\t\t\tthis._applyWidgetAttributes(tabView);\n\t\t\treturn tabView;\n\t\t},\n\n\t\tgetAttribute: function(attributeName, defaultValue) {\n\t\t\tif(attributeName === \"layout\") return \"none\";\n\t\t\treturn this.base(arguments, attributeName, defaultValue);\n\t\t},\n\n\t\tgetSelection: function() {\n\t\t\tvar selection = this.getMainWidget().getSelection();\n\t\t\tif(!selection || selection.length !== 1) return null;\n\t\t\treturn selection[0].getUserData(\"qookeryComponent\");\n\t\t},\n\n\t\tsetSelection: function(page) {\n\t\t\tthis.getMainWidget().setSelection(page ? [ page.getMainWidget() ] : [ ]);\n\t\t}\n\t}\n});\n"
+  ]
+}

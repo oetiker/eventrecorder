@@ -1,0 +1,45 @@
+{
+  "version": 3,
+  "sources": [
+    "/home/travis/build/cboulanger/eventrecorder/contrib/ergobyte_qookery_v0.7.0-pre/qookery/source/class/qookery/internal/components/ImageComponent.js"
+  ],
+  "names": [
+    "qx",
+    "Bootstrap",
+    "executePendingDefers",
+    "$$dbClassInfo",
+    "Class",
+    "define",
+    "extend",
+    "qookery",
+    "internal",
+    "components",
+    "Component",
+    "construct",
+    "parentComponent",
+    "members",
+    "getAttributeType",
+    "attributeName",
+    "_createWidgets",
+    "image",
+    "ui",
+    "basic",
+    "Image",
+    "getAttribute",
+    "_applyAttribute",
+    "_applyWidgetAttributes",
+    "getSource",
+    "getMainWidget",
+    "setSource",
+    "source",
+    "getScale",
+    "setScale",
+    "scale",
+    "ImageComponent"
+  ],
+  "mappings": ";;;;;;;;;;;;;;AAAAA,IAAGC,SAAH,CAAaC,oBAAb,CAAkCC,aAAlC,EAkBAH,GAAGI,KAAH,CAASC,MAAT,CAAgB,4CAAhB,EAA8D;;AAE7DC,UAAQC,QAAQC,QAAR,CAAiBC,UAAjB,CAA4BC,SAFyB;;AAI7DC,aAAW,mBAASC,eAAT,EAA0B;AACpC,gEAAqBA,eAArB;AACA,GAN4D;;AAQ7DC,WAAS;;AAER;;AAEAC,qBAAkB,0BAASC,aAAT,EAAwB;AACzC,YAAOA,aAAP;AACA,UAAK,OAAL;AAAc,aAAO,SAAP;AACd,UAAK,QAAL;AAAe,aAAO,mBAAP;AACf;AAAS,mGAA4BA,aAA5B;AAHT;AAKA,IAVO;;AAYR;;AAEAC,mBAAgB,0BAAW;AAC1B,QAAIC,QAAQ,IAAIjB,GAAGkB,EAAH,CAAMC,KAAN,CAAYC,KAAhB,CAAsB,KAAKC,YAAL,CAAkB,QAAlB,EAA4B,IAA5B,CAAtB,CAAZ;AACA,SAAKC,eAAL,CAAqB,OAArB,EAA8BL,KAA9B,EAAqC,OAArC;AACA,SAAKM,sBAAL,CAA4BN,KAA5B;AACA,WAAO,CAAEA,KAAF,CAAP;AACA,IAnBO;;AAqBRO,cAAW,qBAAW;AACrB,WAAO,KAAKC,aAAL,GAAqBD,SAArB,EAAP;AACA,IAvBO;;AAyBRE,cAAW,mBAASC,MAAT,EAAiB;AAC3B,SAAKF,aAAL,GAAqBC,SAArB,CAA+BC,MAA/B;AACA,IA3BO;;AA6BRC,aAAU,oBAAW;AACpB,WAAO,KAAKH,aAAL,GAAqBG,QAArB,EAAP;AACA,IA/BO;;AAiCRC,aAAU,kBAASC,KAAT,EAAgB;AACzB,SAAKL,aAAL,GAAqBI,QAArB,CAA8BC,KAA9B;AACA;AAnCO;AARoD,EAA9D,C;AAlBAvB,SAAQC,QAAR,CAAiBC,UAAjB,CAA4BsB,cAA5B,CAA2C5B,aAA3C,GAA2DA,aAA3D",
+  "file": "ImageComponent.js",
+  "sourcesContent": [
+    "/*\n\tQookery - Declarative UI Building for Qooxdoo\n\n\tCopyright (c) Ergobyte Informatics S.A., www.ergobyte.gr\n\n\tLicensed under the Apache License, Version 2.0 (the \"License\");\n\tyou may not use this file except in compliance with the License.\n\tYou may obtain a copy of the License at\n\n\t\thttp://www.apache.org/licenses/LICENSE-2.0\n\n\tUnless required by applicable law or agreed to in writing, software\n\tdistributed under the License is distributed on an \"AS IS\" BASIS,\n\tWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n\tSee the License for the specific language governing permissions and\n\tlimitations under the License.\n*/\n\nqx.Class.define(\"qookery.internal.components.ImageComponent\", {\n\n\textend: qookery.internal.components.Component,\n\n\tconstruct: function(parentComponent) {\n\t\tthis.base(arguments, parentComponent);\n\t},\n\n\tmembers: {\n\n\t\t// Metadata\n\n\t\tgetAttributeType: function(attributeName) {\n\t\t\tswitch(attributeName) {\n\t\t\tcase \"scale\": return \"Boolean\";\n\t\t\tcase \"source\": return \"ReplaceableString\";\n\t\t\tdefault: return this.base(arguments, attributeName);\n\t\t\t}\n\t\t},\n\n\t\t// Creation\n\n\t\t_createWidgets: function() {\n\t\t\tvar image = new qx.ui.basic.Image(this.getAttribute(\"source\", null));\n\t\t\tthis._applyAttribute(\"scale\", image, \"scale\");\n\t\t\tthis._applyWidgetAttributes(image);\n\t\t\treturn [ image ];\n\t\t},\n\n\t\tgetSource: function() {\n\t\t\treturn this.getMainWidget().getSource();\n\t\t},\n\n\t\tsetSource: function(source) {\n\t\t\tthis.getMainWidget().setSource(source);\n\t\t},\n\n\t\tgetScale: function() {\n\t\t\treturn this.getMainWidget().getScale();\n\t\t},\n\n\t\tsetScale: function(scale) {\n\t\t\tthis.getMainWidget().setScale(scale);\n\t\t}\n\t}\n});\n"
+  ]
+}

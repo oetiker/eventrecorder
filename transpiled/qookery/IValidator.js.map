@@ -1,0 +1,26 @@
+{
+  "version": 3,
+  "sources": [
+    "/home/travis/build/cboulanger/eventrecorder/contrib/ergobyte_qookery_v0.7.0-pre/qookery/source/class/qookery/IValidator.js"
+  ],
+  "names": [
+    "qx",
+    "Bootstrap",
+    "executePendingDefers",
+    "$$dbClassInfo",
+    "Interface",
+    "define",
+    "members",
+    "createValidation",
+    "component",
+    "invalidMessage",
+    "options",
+    "qookery",
+    "IValidator"
+  ],
+  "mappings": ";;;;;;;;;AAAAA,IAAGC,SAAH,CAAaC,oBAAb,CAAkCC,aAAlC,EAqBAH,GAAGI,SAAH,CAAaC,MAAb,CAAoB,oBAApB,EAA0C;;AAEzCC,WAAS;;AAER;;;;;;;AAOAC,qBAAkB,0BAASC,SAAT,EAAoBC,cAApB,EAAoCC,OAApC,EAA6C,CAAG;AAT1D;AAFgC,EAA1C,C;AArBAC,SAAQC,UAAR,CAAmBT,aAAnB,GAAmCA,aAAnC",
+  "file": "IValidator.js",
+  "sourcesContent": [
+    "/*\n\tQookery - Declarative UI Building for Qooxdoo\n\n\tCopyright (c) Ergobyte Informatics S.A., www.ergobyte.gr\n\n\tLicensed under the Apache License, Version 2.0 (the \"License\");\n\tyou may not use this file except in compliance with the License.\n\tYou may obtain a copy of the License at\n\n\t\thttp://www.apache.org/licenses/LICENSE-2.0\n\n\tUnless required by applicable law or agreed to in writing, software\n\tdistributed under the License is distributed on an \"AS IS\" BASIS,\n\tWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n\tSee the License for the specific language governing permissions and\n\tlimitations under the License.\n*/\n\n/**\n * Validators are used by components to instanciate validation functions\n */\nqx.Interface.define(\"qookery.IValidator\", {\n\n\tmembers: {\n\n\t\t/**\n\t\t * Create a validation function\n\t\t *\n\t\t * @param component {qookery.IComponent} component that will receive the new validation\n\t\t * @param invalidMessage {String?} message that will be displayed when validation fails\n\t\t * @param options {Map?} optional map with validator-specific arguments\n\t\t */\n\t\tcreateValidation: function(component, invalidMessage, options) { }\n\t}\n});\n"
+  ]
+}

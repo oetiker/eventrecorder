@@ -1,0 +1,41 @@
+{
+  "version": 3,
+  "sources": [
+    "/home/travis/build/cboulanger/eventrecorder/contrib/ergobyte_qookery_v0.7.0-pre/qookery/source/class/qookery/internal/components/IframeComponent.js"
+  ],
+  "names": [
+    "qx",
+    "Bootstrap",
+    "executePendingDefers",
+    "$$dbClassInfo",
+    "Class",
+    "define",
+    "extend",
+    "qookery",
+    "internal",
+    "components",
+    "Component",
+    "construct",
+    "parentComponent",
+    "members",
+    "_createWidgets",
+    "source",
+    "getAttribute",
+    "iframe",
+    "ui",
+    "embed",
+    "Iframe",
+    "_applyWidgetAttributes",
+    "setSource",
+    "getMainWidget",
+    "getSource",
+    "getDocument",
+    "getWindow",
+    "IframeComponent"
+  ],
+  "mappings": ";;;;;;;;;;;;;;AAAAA,IAAGC,SAAH,CAAaC,oBAAb,CAAkCC,aAAlC,EAkBAH,GAAGI,KAAH,CAASC,MAAT,CAAgB,6CAAhB,EAA+D;;AAE9DC,UAAQC,QAAQC,QAAR,CAAiBC,UAAjB,CAA4BC,SAF0B;;AAI9DC,aAAW,mBAASC,eAAT,EAA0B;AACpC,gEAAqBA,eAArB;AACA,GAN6D;;AAQ9DC,WAAS;;AAERC,mBAAgB,0BAAW;AAC1B,QAAIC,SAAS,KAAKC,YAAL,CAAkB,QAAlB,EAA4B,aAA5B,CAAb;AACA,QAAIC,SAAS,IAAIjB,GAAGkB,EAAH,CAAMC,KAAN,CAAYC,MAAhB,CAAuBL,MAAvB,CAAb;AACA,SAAKM,sBAAL,CAA4BJ,MAA5B;AACA,WAAO,CAAEA,MAAF,CAAP;AACA,IAPO;;AASRK,cAAW,mBAASP,MAAT,EAAiB;AAC3B,SAAKQ,aAAL,GAAqBD,SAArB,CAA+BP,MAA/B;AACA,IAXO;;AAaRS,cAAW,qBAAW;AACrB,WAAO,KAAKD,aAAL,GAAqBC,SAArB,EAAP;AACA,IAfO;;AAiBRC,gBAAa,uBAAW;AACvB,WAAO,KAAKF,aAAL,GAAqBE,WAArB,EAAP;AACA,IAnBO;;AAqBRC,cAAW,qBAAW;AACrB,WAAO,KAAKH,aAAL,GAAqBG,SAArB,EAAP;AACA;AAvBO;AARqD,EAA/D,C;AAlBAnB,SAAQC,QAAR,CAAiBC,UAAjB,CAA4BkB,eAA5B,CAA4CxB,aAA5C,GAA4DA,aAA5D",
+  "file": "IframeComponent.js",
+  "sourcesContent": [
+    "/*\n\tQookery - Declarative UI Building for Qooxdoo\n\n\tCopyright (c) Ergobyte Informatics S.A., www.ergobyte.gr\n\n\tLicensed under the Apache License, Version 2.0 (the \"License\");\n\tyou may not use this file except in compliance with the License.\n\tYou may obtain a copy of the License at\n\n\t\thttp://www.apache.org/licenses/LICENSE-2.0\n\n\tUnless required by applicable law or agreed to in writing, software\n\tdistributed under the License is distributed on an \"AS IS\" BASIS,\n\tWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n\tSee the License for the specific language governing permissions and\n\tlimitations under the License.\n*/\n\nqx.Class.define(\"qookery.internal.components.IframeComponent\", {\n\n\textend: qookery.internal.components.Component,\n\n\tconstruct: function(parentComponent) {\n\t\tthis.base(arguments, parentComponent);\n\t},\n\n\tmembers: {\n\n\t\t_createWidgets: function() {\n\t\t\tvar source = this.getAttribute(\"source\", \"about:blank\");\n\t\t\tvar iframe = new qx.ui.embed.Iframe(source);\n\t\t\tthis._applyWidgetAttributes(iframe);\n\t\t\treturn [ iframe ];\n\t\t},\n\n\t\tsetSource: function(source) {\n\t\t\tthis.getMainWidget().setSource(source);\n\t\t},\n\n\t\tgetSource: function() {\n\t\t\treturn this.getMainWidget().getSource();\n\t\t},\n\n\t\tgetDocument: function() {\n\t\t\treturn this.getMainWidget().getDocument();\n\t\t},\n\n\t\tgetWindow: function() {\n\t\t\treturn this.getMainWidget().getWindow();\n\t\t}\n\t}\n});\n"
+  ]
+}

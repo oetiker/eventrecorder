@@ -1,0 +1,41 @@
+{
+  "version": 3,
+  "sources": [
+    "/home/travis/build/cboulanger/eventrecorder/contrib/ergobyte_qookery_v0.7.0-pre/qookery/source/class/qookery/internal/formats/NumberFormat.js"
+  ],
+  "names": [
+    "qx",
+    "Bootstrap",
+    "executePendingDefers",
+    "$$dbClassInfo",
+    "Class",
+    "define",
+    "extend",
+    "util",
+    "format",
+    "NumberFormat",
+    "construct",
+    "options",
+    "__setOptions",
+    "members",
+    "key",
+    "__setOption",
+    "value",
+    "setGroupingUsed",
+    "setPrefix",
+    "setPostfix",
+    "setMinimumFractionDigits",
+    "parseInt",
+    "setMaximumFractionDigits",
+    "setMinimumIntegerDigits",
+    "setMaximumIntegerDigits",
+    "qookery",
+    "internal",
+    "formats"
+  ],
+  "mappings": ";;;;;;;;;;;;;AAAAA,IAAGC,SAAH,CAAaC,oBAAb,CAAkCC,aAAlC,EAkBAH,GAAGI,KAAH,CAASC,MAAT,CAAgB,uCAAhB,EAAyD;;AAExDC,UAAQN,GAAGO,IAAH,CAAQC,MAAR,CAAeC,YAFiC;;AAIxDC,aAAW,mBAASC,OAAT,EAAkB;AAC5B;AACA,QAAKC,YAAL,CAAkBD,OAAlB;AACA,GAPuD;;AASxDE,WAAS;;AAERD,iBAAc,sBAASD,OAAT,EAAkB;AAC/B,SAAI,IAAIG,GAAR,IAAeH,OAAf;AACC,UAAKI,WAAL,CAAiBD,GAAjB,EAAsBH,QAAQG,GAAR,CAAtB;AADD;AAEA,IALO;;AAORC,gBAAa,qBAASD,GAAT,EAAcE,KAAd,EAAqB;AACjC,YAAOF,GAAP;AACA,UAAK,cAAL;AACC,WAAKG,eAAL,CAAqB,CAAC,CAACD,KAAvB;AACA;AACD,UAAK,QAAL;AACC,WAAKE,SAAL,CAAeF,KAAf;AACA;AACD,UAAK,SAAL;AACC,WAAKG,UAAL,CAAgBH,KAAhB;AACA;AACD,UAAK,gBAAL;AAAuB;AACtB,WAAKI,wBAAL,CAA8BC,SAASL,KAAT,CAA9B;AACA,WAAKM,wBAAL,CAA8BD,SAASL,KAAT,CAA9B;AACA;AACD,UAAK,uBAAL;AACC,WAAKI,wBAAL,CAA8BC,SAASL,KAAT,CAA9B;AACA;AACD,UAAK,uBAAL;AACC,WAAKM,wBAAL,CAA8BD,SAASL,KAAT,CAA9B;AACA;AACD,UAAK,eAAL;AAAsB;AACrB,WAAKO,uBAAL,CAA6BF,SAASL,KAAT,CAA7B;AACA,WAAKQ,uBAAL,CAA6BH,SAASL,KAAT,CAA7B;AACA;AACD,UAAK,sBAAL;AACC,WAAKO,uBAAL,CAA6BF,SAASL,KAAT,CAA7B;AACA;AACD,UAAK,sBAAL;AACC,WAAKQ,uBAAL,CAA6BH,SAASL,KAAT,CAA7B;AACA;AA7BD;AA+BA;AAvCO;AAT+C,EAAzD,C;AAlBAS,SAAQC,QAAR,CAAiBC,OAAjB,CAAyBlB,YAAzB,CAAsCN,aAAtC,GAAsDA,aAAtD",
+  "file": "NumberFormat.js",
+  "sourcesContent": [
+    "/*\n\tQookery - Declarative UI Building for Qooxdoo\n\n\tCopyright (c) Ergobyte Informatics S.A., www.ergobyte.gr\n\n\tLicensed under the Apache License, Version 2.0 (the \"License\");\n\tyou may not use this file except in compliance with the License.\n\tYou may obtain a copy of the License at\n\n\t\thttp://www.apache.org/licenses/LICENSE-2.0\n\n\tUnless required by applicable law or agreed to in writing, software\n\tdistributed under the License is distributed on an \"AS IS\" BASIS,\n\tWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n\tSee the License for the specific language governing permissions and\n\tlimitations under the License.\n*/\n\nqx.Class.define(\"qookery.internal.formats.NumberFormat\", {\n\n\textend: qx.util.format.NumberFormat,\n\n\tconstruct: function(options) {\n\t\tthis.base(arguments);\n\t\tthis.__setOptions(options);\n\t},\n\n\tmembers: {\n\n\t\t__setOptions: function(options) {\n\t\t\tfor(var key in options)\n\t\t\t\tthis.__setOption(key, options[key]);\n\t\t},\n\n\t\t__setOption: function(key, value) {\n\t\t\tswitch(key) {\n\t\t\tcase \"groupingUsed\":\n\t\t\t\tthis.setGroupingUsed(!!value);\n\t\t\t\treturn;\n\t\t\tcase \"prefix\":\n\t\t\t\tthis.setPrefix(value);\n\t\t\t\treturn;\n\t\t\tcase \"postfix\":\n\t\t\t\tthis.setPostfix(value);\n\t\t\t\treturn;\n\t\t\tcase \"fractionDigits\": // Shorthand for setting both min and max\n\t\t\t\tthis.setMinimumFractionDigits(parseInt(value));\n\t\t\t\tthis.setMaximumFractionDigits(parseInt(value));\n\t\t\t\treturn;\n\t\t\tcase \"minimumFractionDigits\":\n\t\t\t\tthis.setMinimumFractionDigits(parseInt(value));\n\t\t\t\treturn;\n\t\t\tcase \"maximumFractionDigits\":\n\t\t\t\tthis.setMaximumFractionDigits(parseInt(value));\n\t\t\t\treturn;\n\t\t\tcase \"integerDigits\": // Shorthand for setting both min and max\n\t\t\t\tthis.setMinimumIntegerDigits(parseInt(value));\n\t\t\t\tthis.setMaximumIntegerDigits(parseInt(value));\n\t\t\t\treturn;\n\t\t\tcase \"minimumIntegerDigits\":\n\t\t\t\tthis.setMinimumIntegerDigits(parseInt(value));\n\t\t\t\treturn;\n\t\t\tcase \"maximumIntegerDigits\":\n\t\t\t\tthis.setMaximumIntegerDigits(parseInt(value));\n\t\t\t\treturn;\n\t\t\t}\n\t\t}\n\t}\n});\n"
+  ]
+}

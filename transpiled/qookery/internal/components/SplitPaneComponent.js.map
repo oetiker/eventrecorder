@@ -1,0 +1,47 @@
+{
+  "version": 3,
+  "sources": [
+    "/home/travis/build/cboulanger/eventrecorder/contrib/ergobyte_qookery_v0.7.0-pre/qookery/source/class/qookery/internal/components/SplitPaneComponent.js"
+  ],
+  "names": [
+    "qx",
+    "Bootstrap",
+    "executePendingDefers",
+    "$$dbClassInfo",
+    "Class",
+    "define",
+    "extend",
+    "qookery",
+    "internal",
+    "components",
+    "ContainerComponent",
+    "construct",
+    "parentComponent",
+    "members",
+    "getAttributeType",
+    "attributeName",
+    "_createContainerWidget",
+    "orientation",
+    "getAttribute",
+    "pane",
+    "ui",
+    "splitpane",
+    "Pane",
+    "_applyWidgetAttributes",
+    "defaultValue",
+    "add",
+    "childComponent",
+    "_addChildComponent",
+    "flexes",
+    "flex",
+    "listChildren",
+    "length",
+    "getMainWidget",
+    "SplitPaneComponent"
+  ],
+  "mappings": ";;;;;;;;;;;;;;AAAAA,IAAGC,SAAH,CAAaC,oBAAb,CAAkCC,aAAlC,EAkBAH,GAAGI,KAAH,CAASC,MAAT,CAAgB,gDAAhB,EAAkE;;AAEjEC,UAAQC,QAAQC,QAAR,CAAiBC,UAAjB,CAA4BC,kBAF6B;;AAIjEC,aAAW,mBAASC,eAAT,EAA0B;AACpC,yEAAqBA,eAArB;AACA,GANgE;;AAQjEC,WAAS;;AAER;;AAEAC,qBAAkB,0BAASC,aAAT,EAAwB;AACzC,YAAOA,aAAP;AACA,UAAK,QAAL;AAAe,aAAO,aAAP;AADf;AAGA,qGAA4BA,aAA5B;AACA,IATO;;AAWR;;AAEAC,2BAAwB,kCAAW;AAClC,QAAIC,cAAc,KAAKC,YAAL,CAAkB,aAAlB,EAAiC,YAAjC,CAAlB;AACA,QAAIC,OAAO,IAAInB,GAAGoB,EAAH,CAAMC,SAAN,CAAgBC,IAApB,CAAyBL,WAAzB,CAAX;AACA,SAAKM,sBAAL,CAA4BJ,IAA5B;AACA,WAAOA,IAAP;AACA,IAlBO;;AAoBRD,iBAAc,sBAASH,aAAT,EAAwBS,YAAxB,EAAsC;AACnD,QAAGT,kBAAkB,QAArB,EAA+B,OAAO,MAAP;AAC/B,iGAA4BA,aAA5B,EAA2CS,YAA3C;AACA,IAvBO;;AAyBRC,QAAK,aAASC,cAAT,EAAyB;AAC7B,SAAKC,kBAAL,CAAwBD,cAAxB;AACA,QAAIE,SAAS,KAAKV,YAAL,CAAkB,QAAlB,CAAb;AACA,QAAIW,OAAOD,SAASA,OAAO,KAAKE,YAAL,GAAoBC,MAApB,GAA6B,CAApC,CAAT,GAAkD,CAA7D;AACA,SAAKC,aAAL,GAAqBP,GAArB,CAAyBC,eAAeM,aAAf,EAAzB,EAAyDH,IAAzD;AACA;AA9BO;AARwD,EAAlE,C;AAlBAtB,SAAQC,QAAR,CAAiBC,UAAjB,CAA4BwB,kBAA5B,CAA+C9B,aAA/C,GAA+DA,aAA/D",
+  "file": "SplitPaneComponent.js",
+  "sourcesContent": [
+    "/*\n\tQookery - Declarative UI Building for Qooxdoo\n\n\tCopyright (c) Ergobyte Informatics S.A., www.ergobyte.gr\n\n\tLicensed under the Apache License, Version 2.0 (the \"License\");\n\tyou may not use this file except in compliance with the License.\n\tYou may obtain a copy of the License at\n\n\t\thttp://www.apache.org/licenses/LICENSE-2.0\n\n\tUnless required by applicable law or agreed to in writing, software\n\tdistributed under the License is distributed on an \"AS IS\" BASIS,\n\tWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n\tSee the License for the specific language governing permissions and\n\tlimitations under the License.\n*/\n\nqx.Class.define(\"qookery.internal.components.SplitPaneComponent\", {\n\n\textend: qookery.internal.components.ContainerComponent,\n\n\tconstruct: function(parentComponent) {\n\t\tthis.base(arguments, parentComponent);\n\t},\n\n\tmembers: {\n\n\t\t// Metadata\n\n\t\tgetAttributeType: function(attributeName) {\n\t\t\tswitch(attributeName) {\n\t\t\tcase \"flexes\": return \"IntegerList\";\n\t\t\t}\n\t\t\treturn this.base(arguments, attributeName);\n\t\t},\n\n\t\t// Creation\n\n\t\t_createContainerWidget: function() {\n\t\t\tvar orientation = this.getAttribute(\"orientation\", \"horizontal\");\n\t\t\tvar pane = new qx.ui.splitpane.Pane(orientation);\n\t\t\tthis._applyWidgetAttributes(pane);\n\t\t\treturn pane;\n\t\t},\n\n\t\tgetAttribute: function(attributeName, defaultValue) {\n\t\t\tif(attributeName === \"layout\") return \"none\";\n\t\t\treturn this.base(arguments, attributeName, defaultValue);\n\t\t},\n\n\t\tadd: function(childComponent) {\n\t\t\tthis._addChildComponent(childComponent);\n\t\t\tvar flexes = this.getAttribute(\"flexes\");\n\t\t\tvar flex = flexes ? flexes[this.listChildren().length - 1] : 0;\n\t\t\tthis.getMainWidget().add(childComponent.getMainWidget(), flex);\n\t\t}\n\t}\n});\n"
+  ]
+}

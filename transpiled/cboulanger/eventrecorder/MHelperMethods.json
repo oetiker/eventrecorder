@@ -1,0 +1,101 @@
+{
+  "className": "cboulanger.eventrecorder.MHelperMethods",
+  "packageName": "cboulanger.eventrecorder",
+  "name": "MHelperMethods",
+  "superClass": null,
+  "interfaces": [],
+  "mixins": [],
+  "functionName": null,
+  "clazz": {
+    "location": {
+      "start": {
+        "line": 18,
+        "column": 0
+      },
+      "end": {
+        "line": 42,
+        "column": 3
+      }
+    },
+    "jsdoc": {
+      "@description": [
+        {
+          "name": "@description",
+          "body": "***********************************************************************\n\nUI Event Recorder\n\nCopyright:\n2018 Christian Boulanger\n\nLicense:\nMIT license\nSee the LICENSE file in the project's top-level directory for details.\n\nAuthors: Christian Boulanger\n\n\n***********************************************************************"
+        }
+      ]
+    }
+  },
+  "type": "mixin",
+  "members": {
+    "addGlobalEventListener": {
+      "location": {
+        "start": {
+          "line": 25,
+          "column": 4
+        },
+        "end": {
+          "line": 30,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Add a function to the global event monitor."
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "body": "fn {Function}"
+          }
+        ]
+      },
+      "type": "function",
+      "access": "public"
+    },
+    "absoluteIdOf": {
+      "location": {
+        "start": {
+          "line": 38,
+          "column": 4
+        },
+        "end": {
+          "line": 40,
+          "column": 5
+        }
+      },
+      "jsdoc": {
+        "@description": [
+          {
+            "name": "@description",
+            "body": "Returns the absolute id of the owned object with that id"
+          }
+        ],
+        "@param": [
+          {
+            "name": "@param",
+            "body": "domNode {Element}"
+          },
+          {
+            "name": "@param",
+            "body": "id {String}"
+          }
+        ],
+        "@return": [
+          {
+            "name": "@return",
+            "body": "{String}",
+            "type": "String",
+            "description": ""
+          }
+        ]
+      },
+      "type": "function",
+      "access": "public"
+    }
+  },
+  "descendants": []
+}

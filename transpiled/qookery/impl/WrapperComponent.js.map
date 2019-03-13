@@ -1,0 +1,34 @@
+{
+  "version": 3,
+  "sources": [
+    "/home/travis/build/cboulanger/eventrecorder/contrib/ergobyte_qookery_v0.7.0-pre/qookery/source/class/qookery/impl/WrapperComponent.js"
+  ],
+  "names": [
+    "qx",
+    "Bootstrap",
+    "executePendingDefers",
+    "$$dbClassInfo",
+    "Class",
+    "define",
+    "extend",
+    "qookery",
+    "internal",
+    "components",
+    "Component",
+    "construct",
+    "widgetClass",
+    "parentComponent",
+    "__widgetClass",
+    "members",
+    "_createWidgets",
+    "mainWidget",
+    "_applyWidgetAttributes",
+    "impl",
+    "WrapperComponent"
+  ],
+  "mappings": ";;;;;;;;;;;;;AAAAA,IAAGC,SAAH,CAAaC,oBAAb,CAAkCC,aAAlC,EAqBAH,GAAGI,KAAH,CAASC,MAAT,CAAgB,+BAAhB,EAAiD;;AAEhDC,UAAQC,QAAQC,QAAR,CAAiBC,UAAjB,CAA4BC,SAFY;;AAIhDC,aAAW,mBAASC,WAAT,EAAsBC,eAAtB,EAAuC;AACjD,gEAAqBA,eAArB;AACA,QAAKC,aAAL,GAAqBF,WAArB;AACA,GAP+C;;AAShDG,WAAS;;AAERD,kBAAe,IAFP;;AAIRE,mBAAgB,0BAAW;AAC1B,QAAIC,aAAa,IAAI,KAAKH,aAAT,CAAuB,IAAvB,CAAjB;AACA,SAAKI,sBAAL,CAA4BD,UAA5B;AACA,WAAO,CAAEA,UAAF,CAAP;AACA;AARO;AATuC,EAAjD,C;AArBAV,SAAQY,IAAR,CAAaC,gBAAb,CAA8BjB,aAA9B,GAA8CA,aAA9C",
+  "file": "WrapperComponent.js",
+  "sourcesContent": [
+    "/*\n\tQookery - Declarative UI Building for Qooxdoo\n\n\tCopyright (c) Ergobyte Informatics S.A., www.ergobyte.gr\n\n\tLicensed under the Apache License, Version 2.0 (the \"License\");\n\tyou may not use this file except in compliance with the License.\n\tYou may obtain a copy of the License at\n\n\t\thttp://www.apache.org/licenses/LICENSE-2.0\n\n\tUnless required by applicable law or agreed to in writing, software\n\tdistributed under the License is distributed on an \"AS IS\" BASIS,\n\tWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n\tSee the License for the specific language governing permissions and\n\tlimitations under the License.\n*/\n\n/**\n * Class wrapping Qooxdoo widgets as Qookery components\n */\nqx.Class.define(\"qookery.impl.WrapperComponent\", {\n\n\textend: qookery.internal.components.Component,\n\n\tconstruct: function(widgetClass, parentComponent) {\n\t\tthis.base(arguments, parentComponent);\n\t\tthis.__widgetClass = widgetClass;\n\t},\n\n\tmembers: {\n\n\t\t__widgetClass: null,\n\n\t\t_createWidgets: function() {\n\t\t\tvar mainWidget = new this.__widgetClass(this);\n\t\t\tthis._applyWidgetAttributes(mainWidget);\n\t\t\treturn [ mainWidget ];\n\t\t}\n\t}\n});\n"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "version": 3,
+  "sources": [
+    "/home/travis/build/cboulanger/eventrecorder/source/class/cboulanger/eventrecorder/MHelperMethods.js"
+  ],
+  "names": [
+    "qx",
+    "Bootstrap",
+    "executePendingDefers",
+    "$$dbClassInfo",
+    "Mixin",
+    "define",
+    "members",
+    "addGlobalEventListener",
+    "fn",
+    "evtMonitor",
+    "event",
+    "Manager",
+    "getGlobalEventMonitor",
+    "setGlobalEventMonitor",
+    "target",
+    "absoluteIdOf",
+    "domNode",
+    "id",
+    "core",
+    "Id",
+    "getAbsoluteIdOf",
+    "ui",
+    "Widget",
+    "getWidgetByElement",
+    "getQxObject",
+    "cboulanger",
+    "eventrecorder",
+    "MHelperMethods"
+  ],
+  "mappings": ";;;;;;;;;;;;AAAAA,KAAGC,SAAH,CAAaC,oBAAb,CAAkCC,aAAlC,EAiBAH,GAAGI,KAAH,CAASC,MAAT,CAAgB,yCAAhB,EAA2D;AACzDC,aACA;AACE;;;;AAIAC,8BAAwB,gCAASC,EAAT,EAAa;AACnC,YAAIC,aAAaT,GAAGU,KAAH,CAASC,OAAT,CAAiBC,qBAAjB,EAAjB;AACAZ,WAAGU,KAAH,CAASC,OAAT,CAAiBE,qBAAjB,CACEJ,aAAc,UAACK,MAAD,EAASJ,KAAT,EAAmB;AAACD,qBAAWK,MAAX,EAAmBJ,KAAnB,EAA2BF,GAAGM,MAAH,EAAWJ,KAAX;AAAkB,SAA/E,GAAmFF,EADrF;AAGD,OAVH;;AAYE;;;;;;AAMAO,oBAAe,sBAASC,OAAT,EAAkBC,EAAlB,EAAsB;AACnC,eAAOjB,GAAGkB,IAAH,CAAQC,EAAR,CAAWC,eAAX,CAA2BpB,GAAGqB,EAAH,CAAMH,IAAN,CAAWI,MAAX,CAAkBC,kBAAlB,CAAqCP,OAArC,EAA8CQ,WAA9C,CAA0DP,EAA1D,CAA3B,CAAP;AACD;AApBH;AAFyD,GAA3D,C;AAjBAQ,aAAWC,aAAX,CAAyBC,cAAzB,CAAwCxB,aAAxC,GAAwDA,aAAxD",
+  "file": "MHelperMethods.js",
+  "sourcesContent": [
+    "/* ************************************************************************\n\n  UI Event Recorder\n\n  Copyright:\n    2018 Christian Boulanger\n\n  License:\n    MIT license\n    See the LICENSE file in the project's top-level directory for details.\n\n  Authors: Christian Boulanger\n\n\n************************************************************************ */\n\n\nqx.Mixin.define(\"cboulanger.eventrecorder.MHelperMethods\", {\n  members :\n  {\n    /**\n     * Add a function to the global event monitor.\n     * @param fn {Function}\n     */\n    addGlobalEventListener: function(fn) {\n      let evtMonitor = qx.event.Manager.getGlobalEventMonitor();\n      qx.event.Manager.setGlobalEventMonitor(\n        evtMonitor ? ((target, event) => {evtMonitor(target, event); fn(target, event)}) : fn\n      );\n    },\n\n    /**\n     * Returns the absolute id of the owned object with that id\n     * @param domNode {Element}\n     * @param id {String}\n     * @returns {String}\n     */\n    absoluteIdOf : function(domNode, id) {\n      return qx.core.Id.getAbsoluteIdOf(qx.ui.core.Widget.getWidgetByElement(domNode).getQxObject(id));\n    }\n  }\n});\n"
+  ]
+}

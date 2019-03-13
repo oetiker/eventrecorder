@@ -1,0 +1,42 @@
+{
+  "version": 3,
+  "sources": [
+    "/home/travis/build/cboulanger/eventrecorder/contrib/ergobyte_qookery_v0.7.0-pre/qookery/source/class/qookery/util/ValidationError.js"
+  ],
+  "names": [
+    "qx",
+    "Bootstrap",
+    "executePendingDefers",
+    "$$dbClassInfo",
+    "Class",
+    "define",
+    "extend",
+    "Error",
+    "construct",
+    "source",
+    "message",
+    "cause",
+    "__source",
+    "__message",
+    "__cause",
+    "Object",
+    "defineProperties",
+    "enumerable",
+    "get",
+    "getFormattedMessage",
+    "members",
+    "getSource",
+    "getMessage",
+    "getCause",
+    "map",
+    "join",
+    "qookery",
+    "util",
+    "ValidationError"
+  ],
+  "mappings": ";;;;;;;;;AAAAA,IAAGC,SAAH,CAAaC,oBAAb,CAAkCC,aAAlC,EAqBAH,GAAGI,KAAH,CAASC,MAAT,CAAgB,8BAAhB,EAAgD;;AAE/CC,UAAQC,KAFuC;;AAI/C;;;;;;;AAOAC,aAAY,mBAASC,MAAT,EAAiBC,OAAjB,EAA0BC,KAA1B,EAAiC;AAC5C,QAAKC,QAAL,GAAgBH,MAAhB;AACA,QAAKI,SAAL,GAAiBH,OAAjB;AACA,QAAKI,OAAL,GAAeH,KAAf;AACAI,UAAOC,gBAAP,CAAwB,IAAxB,EAA8B;AAC7B,eAAW;AACVC,iBAAY,KADF;AAEVC,UAAK,eAAW;AACf,aAAO,KAAKC,mBAAL,EAAP;AACA;AAJS;AADkB,IAA9B;AAQA,GAvB8C;;AAyB/CC,WAAS;;AAERR,aAAU,IAFF;AAGRC,cAAW,IAHH;AAIRC,YAAS,IAJD;;AAMR;;;;;AAKAO,cAAW,qBAAW;AACrB,WAAO,KAAKT,QAAZ;AACA,IAbO;;AAeR;;;;;AAKAU,eAAY,sBAAW;AACtB,WAAO,KAAKT,SAAZ;AACA,IAtBO;;AAwBR;;;;;AAKAU,aAAU,oBAAW;AACpB,WAAO,KAAKT,OAAZ;AACA,IA/BO;;AAiCR;;;;;AAKAK,wBAAqB,+BAAW;AAC/B,QAAIT,UAAU,KAAKG,SAAL,IAAkB,EAAhC;AACA,QAAG,KAAKC,OAAL,IAAgB,IAAnB,EAAyB;AACxB,SAAGJ,OAAH,EAAYA,WAAW,IAAX;AACZA,gBAAW,KAAKI,OAAL,CAAaU,GAAb,CAAiB,UAASb,KAAT,EAAgB;AAAE,aAAOA,MAAMQ,mBAAN,EAAP;AAAqC,MAAxE,EAA0EM,IAA1E,CAA+E,IAA/E,CAAX;AACA;AACD,QAAG,CAACf,OAAJ,EAAaA,UAAU,mBAAV;AACb,WAAOA,OAAP;AACA;AA9CO;AAzBsC,EAAhD,C;AArBAgB,SAAQC,IAAR,CAAaC,eAAb,CAA6BzB,aAA7B,GAA6CA,aAA7C",
+  "file": "ValidationError.js",
+  "sourcesContent": [
+    "/*\n\tQookery - Declarative UI Building for Qooxdoo\n\n\tCopyright (c) Ergobyte Informatics S.A., www.ergobyte.gr\n\n\tLicensed under the Apache License, Version 2.0 (the \"License\");\n\tyou may not use this file except in compliance with the License.\n\tYou may obtain a copy of the License at\n\n\t\thttp://www.apache.org/licenses/LICENSE-2.0\n\n\tUnless required by applicable law or agreed to in writing, software\n\tdistributed under the License is distributed on an \"AS IS\" BASIS,\n\tWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n\tSee the License for the specific language governing permissions and\n\tlimitations under the License.\n*/\n\n/**\n * Instances of this class pack helpful information about discovered validation errors\n */\nqx.Class.define(\"qookery.util.ValidationError\", {\n\n\textend: Error,\n\n\t/**\n\t * Construct a new validation error\n\t *\n\t * @param source {any} value that represents the source of error\n\t * @param message {String?} error message\n\t * @param cause {Array?} array of underlying errors\n\t */\n\tconstruct : function(source, message, cause) {\n\t\tthis.__source = source;\n\t\tthis.__message = message;\n\t\tthis.__cause = cause;\n\t\tObject.defineProperties(this, {\n\t\t\t\"message\": {\n\t\t\t\tenumerable: false,\n\t\t\t\tget: function() {\n\t\t\t\t\treturn this.getFormattedMessage();\n\t\t\t\t}\n\t\t\t}\n\t\t});\n\t},\n\n\tmembers: {\n\n\t\t__source: null,\n\t\t__message: null,\n\t\t__cause: null,\n\n\t\t/**\n\t\t * Return the source of this error, if available\n\t\t *\n\t\t * @return {any} value that represents the source of error, may be <code>null</code>\n\t\t */\n\t\tgetSource: function() {\n\t\t\treturn this.__source;\n\t\t},\n\n\t\t/**\n\t\t * Return a message for this error\n\t\t *\n\t\t * @return {String} error message, may be <code>null</code>\n\t\t */\n\t\tgetMessage: function() {\n\t\t\treturn this.__message;\n\t\t},\n\n\t\t/**\n\t\t * Return an array of errors that are the underlying cause of this error\n\t\t *\n\t\t * @return {Array} array of underlying errors or <code>null</code> if not set\n\t\t */\n\t\tgetCause: function() {\n\t\t\treturn this.__cause;\n\t\t},\n\n\t\t/**\n\t\t * Return the computed formatted message which describes this error is more detail\n\t\t *\n\t\t * @return {String} an error message, <code>null</code> is never returned\n\t\t */\n\t\tgetFormattedMessage: function() {\n\t\t\tvar message = this.__message || \"\";\n\t\t\tif(this.__cause != null) {\n\t\t\t\tif(message) message += \": \";\n\t\t\t\tmessage += this.__cause.map(function(cause) { return cause.getFormattedMessage(); }).join(\"; \");\n\t\t\t}\n\t\t\tif(!message) message = \"Nondescript error\";\n\t\t\treturn message;\n\t\t}\n\t}\n});\n"
+  ]
+}

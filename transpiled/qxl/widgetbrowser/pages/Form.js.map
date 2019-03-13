@@ -1,0 +1,34 @@
+{
+  "version": 3,
+  "sources": [
+    "/home/travis/build/cboulanger/eventrecorder/contrib/qooxdoo_qxl.widgetbrowser_v0.1.6/source/class/qxl/widgetbrowser/pages/Form.js"
+  ],
+  "names": [
+    "qx",
+    "Bootstrap",
+    "executePendingDefers",
+    "$$dbClassInfo",
+    "Class",
+    "define",
+    "extend",
+    "qxl",
+    "widgetbrowser",
+    "pages",
+    "AbstractPage",
+    "statics",
+    "ITEM_SIZE",
+    "construct",
+    "formItems",
+    "formdemo",
+    "FormItems",
+    "_widgets",
+    "getWidgets",
+    "add",
+    "Form"
+  ],
+  "mappings": ";;;;;;;;;;;;;;;;AAAAA,KAAGC,SAAH,CAAaC,oBAAb,CAAkCC,aAAlC,EA4BAH,GAAGI,KAAH,CAASC,MAAT,CAAgB,8BAAhB,EACA;AACEC,YAAQC,IAAIC,aAAJ,CAAkBC,KAAlB,CAAwBC,YADlC;;AAGEC,aACA;AACEC,iBAAW;AADb,KAJF;;AAQEC,eAAY,qBACZ;AACE;;AAEA,UAAIC,YAAY,IAAIP,IAAIQ,QAAJ,CAAaC,SAAjB,EAAhB;AACA,WAAKC,QAAL,GAAgBH,UAAUI,UAAV,EAAhB;AACA,WAAKC,GAAL,CAASL,SAAT;AACD;AAfH,GADA,C;AA5BAP,MAAIC,aAAJ,CAAkBC,KAAlB,CAAwBW,IAAxB,CAA6BjB,aAA7B,GAA6CA,aAA7C",
+  "file": "Form.js",
+  "sourcesContent": [
+    "/* ************************************************************************\n\n   qooxdoo - the new era of web development\n\n   http://qooxdoo.org\n\n   Copyright:\n     2004-2010 1&1 Internet AG, Germany, http://www.1und1.de\n\n   License:\n     MIT: https://opensource.org/licenses/MIT\n     See the LICENSE file in the project's top-level directory for details.\n\n   Authors:\n     * Tristan Koch (tristankoch)\n\n************************************************************************ */\n\n/**\n * Demonstrates qx.ui.form(...):\n *\n * AbstractField, AbstractSelectBox, Button, CheckBox, ComboBox, DateField,\n * HoverButton, List, ListItem, MenuButton, PasswordField, RadioButton,\n * RadioButtonGroup, RepeatButton, SelectBox, Slider, Spinner, SplitButton,\n * TextArea, TextField, ToggleButton\n *\n * @ignore(qxc)\n */\nqx.Class.define(\"qxl.widgetbrowser.pages.Form\",\n{\n  extend: qxl.widgetbrowser.pages.AbstractPage,\n\n  statics:\n  {\n    ITEM_SIZE: 3\n  },\n\n  construct : function()\n  {\n    this.base(arguments);\n\n    var formItems = new qxl.formdemo.FormItems();\n    this._widgets = formItems.getWidgets();\n    this.add(formItems);\n  }\n});\n"
+  ]
+}

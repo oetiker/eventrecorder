@@ -1,0 +1,45 @@
+{
+  "version": 3,
+  "sources": [
+    "/home/travis/build/cboulanger/eventrecorder/contrib/ergobyte_qookery_v0.7.0-pre/qookery/source/class/qookery/util/Debug.js"
+  ],
+  "names": [
+    "qx",
+    "Bootstrap",
+    "executePendingDefers",
+    "$$dbClassInfo",
+    "Class",
+    "define",
+    "type",
+    "statics",
+    "logScriptError",
+    "object",
+    "sourceCode",
+    "error",
+    "stackTraceLines",
+    "dev",
+    "StackTrace",
+    "getStackTraceFromError",
+    "lineNumber",
+    "match",
+    "i",
+    "length",
+    "stackTraceLine",
+    "parseInt",
+    "startIndex",
+    "newLineIndex",
+    "indexOf",
+    "log",
+    "Logger",
+    "warn",
+    "substr",
+    "qookery",
+    "util",
+    "Debug"
+  ],
+  "mappings": ";;;;;;;;;;;AAAAA,IAAGC,SAAH,CAAaC,oBAAb,CAAkCC,aAAlC,EAqBAH,GAAGI,KAAH,CAASC,MAAT,CAAgB,oBAAhB,EAAsC;;AAErCC,QAAM,QAF+B;;AAIrCC,WAAS;;AAER;;;;;;;;;;AAUAC,mBAAgB,wBAASC,MAAT,EAAiBC,UAAjB,EAA6BC,KAA7B,EAAoC;AACnD,QAAIC,kBAAkBZ,GAAGa,GAAH,CAAOC,UAAP,CAAkBC,sBAAlB,CAAyCJ,KAAzC,CAAtB;AACA,QAAGC,mBAAmB,IAAtB,EAA4B;AAC5B,QAAII,aAAa,IAAjB;AAAA,QAAuBC,KAAvB;AACA,SAAI,IAAIC,IAAI,CAAZ,EAAeA,IAAIN,gBAAgBO,MAAnC,EAA2CD,GAA3C,EAAgD;AAC/C,SAAIE,iBAAiBR,gBAAgBM,CAAhB,CAArB;AACAD,aAAQG,eAAeH,KAAf,CAAqB,6BAArB,CAAR;AACA,SAAGA,SAAS,IAAZ,EAAkB;AAClBD,kBAAaK,SAASJ,MAAM,CAAN,CAAT,CAAb;AACA;AACA;AACD,QAAGD,cAAc,IAAjB,EAAuB;AACvB,QAAIM,aAAa,CAAjB;AACA,SAAI,IAAIJ,IAAI,CAAZ,EAAeA,IAAIF,UAAnB,EAA+BE,GAA/B,EAAoC;AACnC,SAAIK,eAAeb,WAAWc,OAAX,CAAmB,IAAnB,EAAyBF,UAAzB,CAAnB;AACA,SAAGC,iBAAiB,CAAC,CAArB,EAAwB;AACxBD,kBAAaC,eAAe,CAA5B;AACA;AACDvB,OAAGyB,GAAH,CAAOC,MAAP,CAAcC,IAAd,CAAmBlB,MAAnB,EAA2B,sBAA3B,EAAmDQ,MAAM,CAAN,CAAnD,EAA6D,GAA7D,EAAkEN,MAAM,SAAN,CAAlE,EAAoF,MAApF,EAA4FD,WAAWkB,MAAX,CAAkBN,UAAlB,EAA8B,GAA9B,CAA5F;AACA;AA/BO;AAJ4B,EAAtC,C;AArBAO,SAAQC,IAAR,CAAaC,KAAb,CAAmB5B,aAAnB,GAAmCA,aAAnC",
+  "file": "Debug.js",
+  "sourcesContent": [
+    "/*\n\tQookery - Declarative UI Building for Qooxdoo\n\n\tCopyright (c) Ergobyte Informatics S.A., www.ergobyte.gr\n\n\tLicensed under the Apache License, Version 2.0 (the \"License\");\n\tyou may not use this file except in compliance with the License.\n\tYou may obtain a copy of the License at\n\n\t\thttp://www.apache.org/licenses/LICENSE-2.0\n\n\tUnless required by applicable law or agreed to in writing, software\n\tdistributed under the License is distributed on an \"AS IS\" BASIS,\n\tWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n\tSee the License for the specific language governing permissions and\n\tlimitations under the License.\n*/\n\n/**\n * Useful debug capabilities\n */\nqx.Class.define(\"qookery.util.Debug\", {\n\n\ttype: \"static\",\n\n\tstatics: {\n\n\t\t/**\n\t\t * Attempt to log a warning about an error that occurred inside a script\n\t\t *\n\t\t * <p>Implementation is browser-specific and can be improved to handle more browsers</p>\n\t\t *\n\t\t * @param object {any} an object that is the context of the log message\n\t\t * @param sourceCode {String} the script's source code\n\t\t * @param error {Error} exception thrown while running script\n\t\t * @return {undefined}\n\t\t */\n\t\tlogScriptError: function(object, sourceCode, error) {\n\t\t\tvar stackTraceLines = qx.dev.StackTrace.getStackTraceFromError(error);\n\t\t\tif(stackTraceLines == null) return;\n\t\t\tvar lineNumber = null, match;\n\t\t\tfor(var i = 0; i < stackTraceLines.length; i++) {\n\t\t\t\tvar stackTraceLine = stackTraceLines[i];\n\t\t\t\tmatch = stackTraceLine.match(/<anonymous>:([\\d]+):([\\d+])/);\n\t\t\t\tif(match == null) continue;\n\t\t\t\tlineNumber = parseInt(match[1]);\n\t\t\t\tbreak;\n\t\t\t}\n\t\t\tif(lineNumber == null) return;\n\t\t\tvar startIndex = 0;\n\t\t\tfor(var i = 3; i < lineNumber; i++) {\n\t\t\t\tvar newLineIndex = sourceCode.indexOf(\"\\n\", startIndex);\n\t\t\t\tif(newLineIndex === -1) break;\n\t\t\t\tstartIndex = newLineIndex + 1;\n\t\t\t}\n\t\t\tqx.log.Logger.warn(object, \"Script error at line\", match[1], \":\", error[\"message\"], \"\\n\\n\", sourceCode.substr(startIndex, 250));\n\t\t}\n\t}\n});\n"
+  ]
+}

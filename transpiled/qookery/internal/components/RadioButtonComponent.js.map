@@ -1,0 +1,44 @@
+{
+  "version": 3,
+  "sources": [
+    "/home/travis/build/cboulanger/eventrecorder/contrib/ergobyte_qookery_v0.7.0-pre/qookery/source/class/qookery/internal/components/RadioButtonComponent.js"
+  ],
+  "names": [
+    "qx",
+    "Bootstrap",
+    "executePendingDefers",
+    "$$dbClassInfo",
+    "Class",
+    "define",
+    "extend",
+    "qookery",
+    "internal",
+    "components",
+    "ButtonComponent",
+    "construct",
+    "parentComponent",
+    "members",
+    "_createAtomWidget",
+    "radioButton",
+    "ui",
+    "form",
+    "RadioButton",
+    "_applyAtomAttributes",
+    "setup",
+    "model",
+    "getAttribute",
+    "type",
+    "setModel",
+    "util",
+    "Xml",
+    "parseValue",
+    "getModel",
+    "getMainWidget",
+    "RadioButtonComponent"
+  ],
+  "mappings": ";;;;;;;;;;;;;;;AAAAA,IAAGC,SAAH,CAAaC,oBAAb,CAAkCC,aAAlC,EAkBAH,GAAGI,KAAH,CAASC,MAAT,CAAgB,kDAAhB,EAAoE;;AAEnEC,UAAQC,QAAQC,QAAR,CAAiBC,UAAjB,CAA4BC,eAF+B;;AAInEC,aAAW,mBAASC,eAAT,EAA0B;AACpC,sEAAqBA,eAArB;AACA,GANkE;;AAQnEC,WAAS;;AAERC,sBAAmB,6BAAW;AAC7B,QAAIC,cAAc,IAAIf,GAAGgB,EAAH,CAAMC,IAAN,CAAWC,WAAf,EAAlB;AACA,SAAKC,oBAAL,CAA0BJ,WAA1B;AACA,WAAOA,WAAP;AACA,IANO;;AAQRK,UAAO,iBAAW;AACjB,QAAIC,QAAQ,KAAKC,YAAL,CAAkB,OAAlB,CAAZ;AACA,QAAGD,SAAS,IAAZ,EAAkB;AACjB,SAAIE,OAAO,KAAKD,YAAL,CAAkB,YAAlB,EAAgC,QAAhC,CAAX;AACA,UAAKE,QAAL,CAAcjB,QAAQkB,IAAR,CAAaC,GAAb,CAAiBC,UAAjB,CAA4B,IAA5B,EAAkCJ,IAAlC,EAAwCF,KAAxC,CAAd;AACA;AACD;AACA,IAfO;;AAiBRO,aAAU,oBAAW;AACpB,WAAO,KAAKC,aAAL,GAAqBD,QAArB,EAAP;AACA,IAnBO;;AAqBRJ,aAAU,kBAASH,KAAT,EAAgB;AACzB,SAAKQ,aAAL,GAAqBL,QAArB,CAA8BH,KAA9B;AACA;AAvBO;AAR0D,EAApE,C;AAlBAd,SAAQC,QAAR,CAAiBC,UAAjB,CAA4BqB,oBAA5B,CAAiD3B,aAAjD,GAAiEA,aAAjE",
+  "file": "RadioButtonComponent.js",
+  "sourcesContent": [
+    "/*\n\tQookery - Declarative UI Building for Qooxdoo\n\n\tCopyright (c) Ergobyte Informatics S.A., www.ergobyte.gr\n\n\tLicensed under the Apache License, Version 2.0 (the \"License\");\n\tyou may not use this file except in compliance with the License.\n\tYou may obtain a copy of the License at\n\n\t\thttp://www.apache.org/licenses/LICENSE-2.0\n\n\tUnless required by applicable law or agreed to in writing, software\n\tdistributed under the License is distributed on an \"AS IS\" BASIS,\n\tWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n\tSee the License for the specific language governing permissions and\n\tlimitations under the License.\n*/\n\nqx.Class.define(\"qookery.internal.components.RadioButtonComponent\", {\n\n\textend: qookery.internal.components.ButtonComponent,\n\n\tconstruct: function(parentComponent) {\n\t\tthis.base(arguments, parentComponent);\n\t},\n\n\tmembers: {\n\n\t\t_createAtomWidget: function() {\n\t\t\tvar radioButton = new qx.ui.form.RadioButton();\n\t\t\tthis._applyAtomAttributes(radioButton);\n\t\t\treturn radioButton;\n\t\t},\n\n\t\tsetup: function() {\n\t\t\tvar model = this.getAttribute(\"model\");\n\t\t\tif(model != null) {\n\t\t\t\tvar type = this.getAttribute(\"model-type\", \"String\");\n\t\t\t\tthis.setModel(qookery.util.Xml.parseValue(this, type, model));\n\t\t\t}\n\t\t\treturn this.base(arguments);\n\t\t},\n\n\t\tgetModel: function() {\n\t\t\treturn this.getMainWidget().getModel();\n\t\t},\n\n\t\tsetModel: function(model) {\n\t\t\tthis.getMainWidget().setModel(model);\n\t\t}\n\t}\n});\n"
+  ]
+}
